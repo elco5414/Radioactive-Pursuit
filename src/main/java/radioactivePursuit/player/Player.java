@@ -86,7 +86,7 @@ public class Player {
 
     }
 
-    public void cure() {
+    public void cure(Creature creature) {
 
     }
 
