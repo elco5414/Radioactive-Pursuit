@@ -1,4 +1,4 @@
 package radioactivePursuit.interactives;
 
-public class Food extends Artifacts{
+public class Food extends Artifact {
 }
