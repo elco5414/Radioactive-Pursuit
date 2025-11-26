@@ -10,6 +10,7 @@ public class Creature {
 
     private static final Double DEFAULT_STARTING_HEALTH = 8.0;
 
+    // is the check right for this? should it be = 0?
     public boolean isCured(){
         return getRadioActiveLevel() < 0;
     }
