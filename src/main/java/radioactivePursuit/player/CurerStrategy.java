@@ -1,6 +1,7 @@
 package radioactivePursuit.player;
 
 import radioactivePursuit.interactives.Creature;
+import radioactivePursuit.planet.Biome;
 
 public class CurerStrategy implements PlayStrategy{
     @Override

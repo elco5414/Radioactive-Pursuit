@@ -11,39 +11,50 @@ public class Player {
     private static Double health;
     private static List<Antidote> antidoteList;
     private static PlayStrategy playerStrat;
+    private static String name;
 
     private static final Double DEFAULT_STARTING_HEALTH = 15.0;
 
     private Biome currentLocation;
 
-    private Player(PlayStrategy playerStrategy){
+    private Player(PlayStrategy playerStrategy) {
         this.health = DEFAULT_STARTING_HEALTH;
         this.playerStrat = playerStrategy;
     }
 
-    public Integer getAntidoteCount(){
-        if(antidoteList == null){ return 0;}
-        else{return antidoteList.size();}
+    public String getName() {
+        return name;
     }
 
-    public double getHealth(){
+    public void setName(String newName) {
+        name = newName;
+    }
+
+    public Integer getAntidoteCount() {
+        if (antidoteList == null) {
+            return 0;
+        } else {
+            return antidoteList.size();
+        }
+    }
+
+    public double getHealth() {
         return health;
     }
 
-    public void setHealth(Double newHealth){
+    public void setHealth(Double newHealth) {
         health = newHealth;
     }
 
-    public void setPlayStrategy(PlayStrategy playStrategy){
+    public void setPlayStrategy(PlayStrategy playStrategy) {
         playerStrat = playStrategy;
     }
 
-    //current method of action -> not sure how this will look alongside user interaction
-    public void doAction(){
+    public void doAction() {
         playerStrat.doAction(this);
     }
 
-    private void Builder(){
+    private void Builder() {
         //put in builder methods
         //get builder
         //build
@@ -55,39 +66,55 @@ public class Player {
     }
 
     public boolean canEat() {
-        this.getCurrentLocation().hasFood();
+        return this.getCurrentLocation().hasFood();
     }
 
     Biome getCurrentLocation() {
         return currentLocation;
     }
 
-    public void setCurrentLocation(Biome biome){
+    public void setCurrentLocation(Biome biome) {
         currentLocation = biome;
     }
 
-    public void fight(Creature creature){
-        //TO-DO: implement fight
+    public void fight(Creature creature) {
+        double creatureHealth = creature.getHealth();
+        if (creatureHealth == health) {
+            creature.setHealth(creatureHealth - 1);
+            setHealth(health - 1);
+        } else if (creatureHealth >= health) {
+            double differenceInHealth = creatureHealth - health;
+            setHealth(health - differenceInHealth);
+        } else {
+            double differenceInHealth = health - creatureHealth;
+            creature.setHealth(creatureHealth - differenceInHealth);
+        }
     }
 
     public boolean canFight() {
-        this.getCurrentLocation().hasRadioActiveCreature();
+        return this.getCurrentLocation().hasRadioActiveCreature();
     }
 
     public boolean canMove() {
-
+        return currentLocation.hasNeighbors();
     }
 
     public void move() {
-       //TO-DO: update to the next biome
+        //TO-DO: update to the next biome
     }
 
-    public boolean canCure(Creature creature){
-
+    public boolean canCure(Creature creature) {
+        boolean curedCreature = creature.isCured();
+        boolean livingCreature = creature.isAlive();
+        if (curedCreature == false && livingCreature == true) {
+            return true;
+        }
+        return false;
     }
 
     public void cure(Creature creature) {
-
+        useAntidote();
+        creature.decrementRadioActiveLevel();
     }
 
     public boolean canCollectAntidote() {
@@ -99,8 +126,8 @@ public class Player {
         antidoteList.add(antidote);
     }
 
-    public void useAntidote(){
-        //TO-DO: remove one antidote from the list
+    public void useAntidote() {
+        antidoteList.removeLast();
     }
 }
 
