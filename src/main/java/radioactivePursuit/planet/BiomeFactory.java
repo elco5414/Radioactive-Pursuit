@@ -1,11 +1,58 @@
-
 package radioactivePursuit.planet;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 public class BiomeFactory {
-    public Biome createBiome(String roomName) {
+
+    Random random = new Random();
+    private static final BiomeType[] biomeTypes = BiomeType.values();
+
+    private int currentNameIndex = 0;
+    public static String[] CITY_NAMES = new String[]{"Oakridge", "Silverport", "Riverview", "Brookstone", "Clearwater", "Northgate"};
+    public static String[] HOSPITAL_NAMES = new String[]{"Central General Hospital", "Riverside Medical Center", "Westview Health Clinic", "Greenfield Medical Plaza", "Lakeside Regional Hospital", "Hillcrest Medical Center"};
+    public static String[] RIVER_NAMES = new String[]{"Pine River", "Maple Creek", "Silver Run", "Clearwater Stream", "Eastridge River", "Northbend Creek"};
+    public static String[] TRAIN_STATION_NAMES = new String[]{"Eastline Station", "Harbor Central", "North Junction", "Union Transit Hub", "Ridgeview Station", "Metro West Terminal"};
+    public static Map<String, String[]> NAMES = new HashMap<>();
+
+    static {
+        NAMES.put("City", CITY_NAMES);
+        NAMES.put("Hospital", HOSPITAL_NAMES);
+        NAMES.put("River", RIVER_NAMES);
+        NAMES.put("TrainStation", TRAIN_STATION_NAMES);
     }
 
-    public Biome createBiome() {
+    Biome createBiome(String name) {
+        int randomIndex = random.nextInt(biomeTypes.length);
+        BiomeType randomType = biomeTypes[randomIndex];
+
+
+    }
+
+    Biome createBiome() {
+        int randomIndex = random.nextInt(biomeTypes.length);
+        BiomeType randomType = biomeTypes[randomIndex];
+
+    }
+
+    public Biome createCityBiome(String name) {
+        return new CityBiome(name);
+    }
+    public Biome createHospitalBiome(String name) {
+        return new HospitalBiome(name);
+    }
+    public Biome createRiverBiome(String name) {
+        return new RiverBiome(name);
+    }
+    public Biome createTrainStationBiome(String name) {
+        return new TrainStationBiome(name);
+    }
+    private String getRandomName(String biomeType) {
+        String[] names = NAMES.get(biomeType);
+        return names[random.nextInt(names.length)];
     }
 }
+

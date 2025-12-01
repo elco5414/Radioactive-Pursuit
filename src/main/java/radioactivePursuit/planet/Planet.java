@@ -26,13 +26,13 @@ public class Planet {
 
 
     public Boolean hasLivingCreatures() {
+
         return biomes.stream().anyMatch(Biome::hasLivingCreatures);
     }
 
-    // might be unnecessary assuming singleton use
-//    public Boolean hasLivingPlayer() {
-//        return;
-//    }
+    public Boolean hasLivingPlayer() {
+        return biomes.stream().anyMatch(Biome::hasLivingPlayer);
+    }
 
 
     public List<Creature> getLivingCreatures() {
@@ -43,10 +43,12 @@ public class Planet {
         return creatures;
     }
 
-
-    // might be unnecessary assuming singleton use
+    //necessary?
 //    public Player getLivingPlayer() {
-//        return player;
+//        for (Biome biome : biomes) {
+//            creatures.addAll(biome.getLivingCreatures());
+//        }
+//        return creatures;
 //    }
 
 
@@ -190,11 +192,11 @@ public class Planet {
                     biome.addNeighbor(nextBiome());
                 }
             }
-            // will have to change implementation likely
-//            if (!planet.hasLivingPlayer()) {
-//                logger.error("No Player created. Terminating game.");
-//                throw new IllegalStateException("No Player created. Terminating game.");
-//            }
+
+            if (!planet.hasLivingPlayer()) {
+                logger.error("No Player created. Terminating game.");
+                throw new IllegalStateException("No Player created. Terminating game.");
+            }
             return planet;
         }
 

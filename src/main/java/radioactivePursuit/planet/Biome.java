@@ -22,12 +22,14 @@ abstract public class Biome {
     private final List<Biome> neighbors = new ArrayList<>();
     private final List<Creature> creatures = new ArrayList<>();
     private final List<Artifact> artifacts = new ArrayList<>();
+    private final BiomeType type;
     private boolean hasPlayer;
     Player player;
 
 
-    protected Biome(String name) {
+    protected Biome(String name, BiomeType type) {
         this.name = name;
+        this.type = type;
     }
 
     public String getName() {
@@ -37,6 +39,7 @@ abstract public class Biome {
     public boolean hasLivingCreatures() {
         return !getLivingCreatures().isEmpty();
     }
+
 
     public boolean hasRadioActiveCreature() {
         return getLivingCreatures().stream()
@@ -127,7 +130,7 @@ abstract public class Biome {
         return artifacts.contains(artifact);
     }
 
-    public boolean hasPlayer() {
+    public boolean hasLivingPlayer() {
         return hasPlayer;
     }
 
