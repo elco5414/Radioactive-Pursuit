@@ -88,7 +88,7 @@ abstract public class Biome {
     // might have to change enter room functionality
     public void add(Creature creature) {
         creatures.add(creature);
-        creature.enterRoom(this);
+        creature.enterBiome(this);
     }
 
 
@@ -109,7 +109,7 @@ abstract public class Biome {
         hasPlayer = false;
     }
 
-    public void enter(Player player) {
+    public void enterBiome(Player player) {
         add(player);
     }
 
