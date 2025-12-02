@@ -1,20 +1,25 @@
 package radioactivePursuit;
 
+import java.util.Random;
 import java.util.Scanner;
 import radioactivePursuit.User.User;
+import radioactivePursuit.creatures.CreatureFactory;
+import radioactivePursuit.interactives.ArtifactFactory;
+import radioactivePursuit.planet.BiomeFactory;
 import radioactivePursuit.planet.Planet;
 import radioactivePursuit.player.Player;
 
 public class Main {
+    static private final Random rand = new Random();
+    static private final int MAX_BIOMES = 5;
+    static private final int MAX_ = 5;
 
     public static void main(String[] args) {
 
         //setting everything up for game play
         User currentUser = userSetUp();
-        Planet currentPlanet = worldSetUp();
         Player currentPlayer = new Player(currentUser.getName());
-
-        //add player to planet
+        Planet currentPlanet = worldSetUp(currentPlayer);
 
         //while loop to actually play the game
         while(gameIsNotOver(currentPlayer, currentPlanet)){
@@ -39,10 +44,20 @@ public class Main {
         return currentUser;
     }
 
-    private static Planet worldSetUp(){
+    private static Planet worldSetUp(Player currentPlayer){
+        BiomeFactory biomeFactory = new BiomeFactory();
+
+        int numberOfBiomes = rand.nextInt(MAX_BIOMES);
+
         // set up the world
         // when instantiating player set the name to the user's name
         // will need to set the players antidote list, some random starting amount
+
+        //change so that biome handles all generation of creatures and artifacts
+        return Planet.getNewBuilder(biomeFactory)
+                .createBiomes(numberOfBiomes)
+                .connectCirclePlanet()
+                .build();
     }
 
     // run the game

@@ -92,50 +92,6 @@ public class Planet {
         }
 
 
-        public Builder createGridOfRooms(int rows, int columns, String[] roomNames) {
-            Biome[][] biomeGrid = new Biome[rows][columns];
-            List<Biome> biomes = new ArrayList<>();
-            // Notice -- don't use i and j. Use row and column -- they are better
-            for (int row = 0; row < rows; row++) {
-                for (int column = 0; column < columns; column++) {
-                    Biome newBiome = biomeFactory.createBiome(roomNames[row * columns + column]);
-                    biomeGrid[row][column] = newBiome;
-                    biomes.add(newBiome);
-                }
-            }
-            planet.biomes = biomes;
-
-
-            // Now connect the rooms
-            for (int row = 0; row < rows; row++) {
-                for (int column = 0; column < columns; column++) {
-                    Biome currentBiome = biomeGrid[row][column];
-                    Biome neighbor;
-                    if (row > 0) {
-                        neighbor = biomeGrid[row - 1][column];
-                        currentBiome.addNeighbor(neighbor);
-                    }
-                    if (column > 0) {
-                        neighbor = biomeGrid[row][column - 1];
-                        currentBiome.addNeighbor(neighbor);
-                    }
-                }
-            }
-            return this;
-        }
-
-
-        public Builder createFullyConnectedBiomes(List<String> biomeNames) {
-            planet.biomes = new ArrayList<>();
-            for (String biomeName : biomeNames) {
-                Biome currentBiome = biomeFactory.createBiome(biomeName);
-                biomeMap.put(currentBiome.getName(), currentBiome);
-                planet.biomes.add(currentBiome);
-            }
-            fullyConnectRooms();
-            return this;
-        }
-
 
         public Builder createBiomes(List<String> biomeNames) {
             planet.biomes = new ArrayList<>();
@@ -147,13 +103,30 @@ public class Planet {
             return this;
         }
 
+        public Builder createBiomes(int numberOfBiomes) {
+            planet.biomes = new ArrayList<>();
+            IntStream.range(0, numberOfBiomes).forEach(_ -> {
+                Biome currentBiome = biomeFactory.createBiome();
+                biomeMap.put(currentBiome.getName(), currentBiome);
+                planet.biomes.add(currentBiome);
+            });
+            return this;
+        }
 
-        public Builder fullyConnectRooms() {
-            for (Biome biome : planet.biomes) {
-                for (Biome otherBiome : planet.biomes) {
-                    biome.addNeighbor(otherBiome);
-                }
+
+        public Builder connectCirclePlanet() {
+            Biome lastBiome = planet.biomes.getLast();
+            Biome firstBiome = planet.biomes.getFirst();
+
+            for (int i = 0; i < planet.biomes.size() - 1; i++) {
+                Biome currentBiome = planet.biomes.get(i);
+                Biome neighbor = planet.biomes.get(i+1);
+
+                currentBiome.addNeighbor(neighbor);
             }
+
+            lastBiome.addNeighbor(firstBiome);
+
             return this;
         }
 
@@ -221,16 +194,6 @@ public class Planet {
             return biomeMap.get(biomeName);
         }
 
-
-        private Builder createBiomes(int numberOfBiomes) {
-            planet.biomes = new ArrayList<>();
-            IntStream.range(0, numberOfBiomes).forEach(_ -> {
-                Biome currentBiome = biomeFactory.createBiome();
-                biomeMap.put(currentBiome.getName(), currentBiome);
-                planet.biomes.add(currentBiome);
-            });
-            return this;
-        }
     }
 
 
