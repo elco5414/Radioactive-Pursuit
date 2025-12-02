@@ -1,4 +1,3 @@
-
 package radioactivePursuit.planet;
 
 
@@ -17,15 +16,14 @@ import java.util.Random;
 
 abstract public class Biome {
 
-    private final String name;
     static private final Random rand = new Random();
-
+    private final String name;
     private final List<Biome> neighbors = new ArrayList<>();
     private final List<Creature> creatures = new ArrayList<>();
     private final List<Artifact> artifacts = new ArrayList<>();
     private final BiomeType type;
-    private boolean hasPlayer;
     Player player;
+    private boolean hasPlayer;
 
 
     protected Biome(String name, BiomeType type) {
@@ -35,6 +33,10 @@ abstract public class Biome {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isType(BiomeType type) {
+        return this.type == type;
     }
 
     public boolean hasLivingCreatures() {
@@ -94,6 +96,7 @@ abstract public class Biome {
 
 
     public void add(Artifact artifact) {
+        artifacts.add(artifact);
     }
 
     public void add(Player player) {

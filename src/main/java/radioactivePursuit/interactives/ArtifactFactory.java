@@ -8,20 +8,14 @@ import java.util.stream.IntStream;
 
 public class ArtifactFactory {
     private static final Random random = new Random();
-
-    public static double DEFAULT_HEALTH_VALUE = 1.0;
-    public static double DEFAULT_CURE_STRENGTH = 1.0;
     private static final double MINIMUM_VALUE = 1.0;
     private static final double MAXIMUM_VALUE = 2.0;
-
     private static final String[] FOOD_NAMES = new String[]{
             "cupcake", "apple", "banana", "steak", "salad", "fries", "burger", "pizza", "eggs",
             "bacon", "muffin", "donut", "chicken", "pasta", "rice", "sushi", "taco", "burrito",
             "nachos", "chips"};
-
-    public static String[] ANTIDOTE_NAMES = new String[]{"tonic", "serum", "salve", "elixir", "remedy", "panacea", "essence", "antitoxin"};
-
     private static final Map<ArtifactType, String[]> NAMES = new HashMap<>();
+    public static String[] ANTIDOTE_NAMES = new String[]{"tonic", "serum", "salve", "elixir", "remedy", "panacea", "essence", "antitoxin"};
 
     static {
         NAMES.put(ArtifactType.Food, FOOD_NAMES);

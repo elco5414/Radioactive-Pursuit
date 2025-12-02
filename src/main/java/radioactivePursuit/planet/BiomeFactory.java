@@ -6,9 +6,7 @@ import java.util.Random;
 
 public class BiomeFactory {
 
-    Random random = new Random();
     private static final BiomeType[] biomeTypes = BiomeType.values();
-
     public static String[] CITY_NAMES = new String[]{"Oakridge", "Silverport", "Riverview", "Brookstone", "Clearwater", "Northgate"};
     public static String[] HOSPITAL_NAMES = new String[]{"Central General Hospital", "Riverside Medical Center", "Westview Health Clinic", "Greenfield Medical Plaza", "Lakeside Regional Hospital", "Hillcrest Medical Center"};
     public static String[] RIVER_NAMES = new String[]{"Pine River", "Maple Creek", "Silver Run", "Clearwater Stream", "Eastridge River", "Northbend Creek"};
@@ -21,6 +19,8 @@ public class BiomeFactory {
         NAMES.put(BiomeType.River, RIVER_NAMES);
         NAMES.put(BiomeType.TrainStation, TRAIN_STATION_NAMES);
     }
+
+    Random random = new Random();
 
     Biome createBiome(String name) {
         int randomIndex = random.nextInt(biomeTypes.length);
@@ -52,15 +52,19 @@ public class BiomeFactory {
     public Biome createCityBiome(String name) {
         return new CityBiome(name);
     }
+
     public Biome createHospitalBiome(String name) {
         return new HospitalBiome(name);
     }
+
     public Biome createRiverBiome(String name) {
         return new RiverBiome(name);
     }
+
     public Biome createTrainStationBiome(String name) {
         return new TrainStationBiome(name);
     }
+
     private String getRandomName(BiomeType biomeType) {
         String[] names = NAMES.get(biomeType);
         return names[random.nextInt(names.length)];

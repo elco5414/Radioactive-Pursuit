@@ -16,6 +16,19 @@ public class Antidote extends Artifact {
     @Override
     public String toString() {
         String formattedHealth = String.format("%.2f", cureStrength);
-        return name + "(" + formattedHealth + ")";
+        return name + "(" + formattedHealth + ")" + "\n" +
+                "      _____\n" +
+                "     `.___,'\n" +
+                "      (___)\n" +
+                "      <   >\n" +
+                "       ) (\n" +
+                "      /`-.\\\n" +
+                "     /     \\\n" +
+                "    / _    _\\\n" +
+                "   :,' `-.' `:\n" +
+                "   |         |\n" +
+                "   :         ;\n" +
+                "    \\       /\n" +
+                "     `.___.'";
     }
 }

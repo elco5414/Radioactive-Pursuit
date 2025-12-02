@@ -14,16 +14,17 @@ import java.util.stream.IntStream;
 public class Planet {
     private List<Biome> biomes;
 
+    public static Builder getNewBuilder(BiomeFactory biomeFactory) {
+        return new Builder(biomeFactory);
+    }
 
     public int size() {
         return biomes.size();
     }
 
-
     public String toString() {
         return String.join("\n\n", biomes.stream().map(Object::toString).toList());
     }
-
 
     public Boolean hasLivingCreatures() {
 
@@ -34,6 +35,13 @@ public class Planet {
         return biomes.stream().anyMatch(Biome::hasLivingPlayer);
     }
 
+    //necessary?
+//    public Player getLivingPlayer() {
+//        for (Biome biome : biomes) {
+//            creatures.addAll(biome.getLivingCreatures());
+//        }
+//        return creatures;
+//    }
 
     public List<Creature> getLivingCreatures() {
         List<Creature> creatures = new ArrayList<>();
@@ -43,24 +51,9 @@ public class Planet {
         return creatures;
     }
 
-    //necessary?
-//    public Player getLivingPlayer() {
-//        for (Biome biome : biomes) {
-//            creatures.addAll(biome.getLivingCreatures());
-//        }
-//        return creatures;
-//    }
-
-
     public List<Biome> getBiomes() {
         return List.copyOf(biomes);
     }
-
-
-    public static Builder getNewBuilder(BiomeFactory biomeFactory) {
-        return new Builder(biomeFactory);
-    }
-
 
     public Biome getBiome(String biomeName) {
         return biomes.stream()
@@ -72,13 +65,11 @@ public class Planet {
 
     public static class Builder {
         static Logger logger = org.slf4j.LoggerFactory.getLogger(Builder.class);
-        private final Random rand = new Random();
-
-
         final Planet planet = new Planet();
+        private final Random rand = new Random();
+        private final BiomeFactory biomeFactory;
         Map<String, Biome> biomeMap = new HashMap<>();
         private int currentBiomeIndex = 0;
-        private final BiomeFactory biomeFactory;
 
 
         private Builder(BiomeFactory biomeFactory) {
@@ -143,7 +134,7 @@ public class Planet {
 
         public Builder createBiomes(List<String> biomeNames) {
             planet.biomes = new ArrayList<>();
-            for (String  biomeName : biomeNames) {
+            for (String biomeName : biomeNames) {
                 Biome currentBiome = biomeFactory.createBiome(biomeName);
                 biomeMap.put(currentBiome.getName(), currentBiome);
                 planet.biomes.add(currentBiome);

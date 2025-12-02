@@ -1,6 +1,7 @@
 package radioactivePursuit.planet;
 
-public class HospitalBiome extends Biome{
+public class HospitalBiome extends Biome {
+
     protected HospitalBiome(String name) {
         super(name, BiomeType.Hospital);
     }
