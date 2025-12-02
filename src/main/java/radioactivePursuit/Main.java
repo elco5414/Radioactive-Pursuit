@@ -23,7 +23,7 @@ public class Main {
 
         //while loop to actually play the game
         while(gameIsNotOver(currentPlayer, currentPlanet)){
-
+            playGame();
         }
 
         Main.finalDisplay();
@@ -46,7 +46,6 @@ public class Main {
 
     private static Planet worldSetUp(Player currentPlayer){
         BiomeFactory biomeFactory = new BiomeFactory();
-
         int numberOfBiomes = rand.nextInt(MAX_BIOMES);
 
         // set up the world
