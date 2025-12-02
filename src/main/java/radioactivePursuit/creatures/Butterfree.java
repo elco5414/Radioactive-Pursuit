@@ -8,22 +8,34 @@ public class Butterfree extends Creature{
     @Override
     public void displayCreature(){
         if(getRadioActiveLevel() == 0){
-            System.out.println(" (\\__/)\n");
-            System.out.println(" (o^-^)\n");
-            System.out.println(" z(\")(\")\n");
+            System.out.println("    .==-.                   .-==.");
+            System.out.println("   \\()8`-._  `.   .'  _.-'8()/");
+            System.out.println("   (88\"   ::.  \\./  .::   \"88)");
+            System.out.println("    \\_.'`-::::.(#).::::-'`._/");
+            System.out.println("      `._... .q(_)p. ..._.'");
+            System.out.println("        \"\"-..-'|=|'`-..-\"\"\n");
         }else if(getRadioActiveLevel() == 1){
-            System.out.println(" (\\__/)\n");
-            System.out.println(" (>‘o‘<)\n");
-            System.out.println(" z(\")(\")\n");
+            System.out.println("    .==-.                   .-==.");
+            System.out.println("   \\()8`-._  `.   .'  _.-'8()/🔥");
+            System.out.println("   (88\"   ::.  \\./  .::   \"88)");
+            System.out.println("    \\_.'`-::::.(#).::::-'`._/");
+            System.out.println("      `._... .q(_)p. ..._.'");
+            System.out.println("        \"\"-..-'|=|'`-..-\"\"\n");
         }else if(getRadioActiveLevel() == 2){
-            System.out.println(" (\\__/)\n");
-            System.out.println(" (^•ᴥ•^)\n");
-            System.out.println(" z(\")(\")🔥\n");
+            System.out.println("    .==-.                   .-==.");
+            System.out.println("   \\()8`-._  `.   .'  _.-'8()/🔥🔥");
+            System.out.println("   (88\"  >:o::.  \\./  .::  o<\"88)");
+            System.out.println("    \\_.'`-::::.(#).::::-'`._/");
+            System.out.println("      `._... .q(_)p. ..._.'");
+            System.out.println("        \"\"-..-'|=|'`-..-\"\"\n");
         }else{
-            System.out.println("   (\\__/)");
-            System.out.println("   (O>_<O)");
-            System.out.println(" 🔥/︵|︵\\🔥");
-            System.out.println("  z(\")(\")");
+            System.out.println("    .==-.       🔥🔥🔥🔥       .-==.");
+            System.out.println("   \\()8`-._  >:O<  _.-'8()/");
+            System.out.println("   (88\"  >:O<::.  \\./  .::  O<\"88)");
+            System.out.println("    \\_.'`-::::.(#).::::-'`._/");
+            System.out.println("      `._... .q(_)p. ..._.'");
+            System.out.println("        \"\"-..-'|=|'`-..-\"\"");
         }
     }
+
 }
