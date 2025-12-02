@@ -23,7 +23,7 @@ public class MenuDisplay {
         if (currentPlayer.canCollectAntidote()) {
             menuOptions.put("Collect Antidote", false);
         }
-        if (currentPlayer.canCure(currentBiome.getCreature())) {
+        if (currentPlayer.canCure(currentPlayer.getCurrentLocation().getCreature())) {
             menuOptions.put("Cure Creature", false);
         }
     }

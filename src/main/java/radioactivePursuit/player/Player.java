@@ -69,7 +69,7 @@ public class Player {
         return this.getCurrentLocation().hasFood();
     }
 
-    Biome getCurrentLocation() {
+    public Biome getCurrentLocation() {
         return currentLocation;
     }
 
