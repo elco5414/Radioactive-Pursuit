@@ -16,7 +16,7 @@ public class UserCharactersVisuals {
     }
 
     public void displayScientist(Player scientist) {
-        System.out.println(scientist.getName() + ": " + scientist.getAntidoteCount() + "🧪, " + scientist.getHealth() + "❤️.\n")
+        System.out.println(scientist.getName() + ": " + scientist.getAntidoteCount() + "🧪, " + scientist.getHealth() + "❤️.\n");
         displayScientistArt();
     }
 }
