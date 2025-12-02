@@ -15,19 +15,19 @@ public class CreatureFactory {
         return rand.nextInt(3) + 1;
     }
 
-    private Creature createPikachu() {
+    public Creature createPikachu() {
         return new Pikachu(pikachuName, 5.0, assignRadioActiveLevel());
     }
 
-    private Creature createSquirtle() {
+    public Creature createSquirtle() {
         return new Squirtle(squirtleName, 7.0, assignRadioActiveLevel());
     }
 
-    private Creature createClefairy() {
+    public Creature createClefairy() {
         return new Clefairy(clefairyName, 4.3, assignRadioActiveLevel());
     }
 
-    private Creature createButterfree() {
+    public Creature createButterfree() {
         return new Butterfree(butterfreeName, 3.0, assignRadioActiveLevel());
     }
 
