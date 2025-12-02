@@ -1,9 +1,12 @@
 package radioactivePursuit.creatures;
 
+import radioactivePursuit.planet.Biome;
+
 abstract public class Creature {
     private static Double health;
     private static int radioActiveLevel;
     private static String name;
+    private static Biome currentBiome;
 
     Creature(String newName, Double newHealth, int newRadioActiveLevel) {
         this.name = newName;

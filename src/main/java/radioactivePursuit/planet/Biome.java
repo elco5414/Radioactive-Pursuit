@@ -5,6 +5,7 @@ import radioactivePursuit.interactives.Antidote;
 import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.interactives.ArtifactType;
 import radioactivePursuit.creatures.Creature;
+import radioactivePursuit.interactives.Food;
 import radioactivePursuit.player.Player;
 
 
@@ -91,7 +92,10 @@ abstract public class Biome {
     // might have to change enter room functionality
     public void add(Creature creature) {
         creatures.add(creature);
-        creature.enterBiome(this);
+    }
+
+    public void add(List<Creature> creatures) {
+        creatures.addAll(creatures);
     }
 
 
@@ -143,12 +147,14 @@ abstract public class Biome {
                 .anyMatch(artifact -> artifact.isType(ArtifactType.Food));
     }
 
-    public Optional<Artifact> getFood() {
-        Optional<Artifact> food = artifacts.stream()
-                .filter(artifact -> artifact.isType(ArtifactType.Food))
+    public Food getFood() {
+        Optional<Artifact> foodOpt = artifacts.stream()
+                .filter(a -> a.isType(ArtifactType.Food))
                 .findAny();
-        food.ifPresent(artifacts::remove);
-        return food;
+
+        foodOpt.ifPresent(artifacts::remove);
+
+        return (Food) foodOpt.orElse(null);
     }
 
     public List<Artifact> getFoodItems() {
@@ -176,12 +182,12 @@ abstract public class Biome {
                 .toList();
     }
 
-    public Optional<Creature> getCreature() {
+    public Creature getCreature() {
         List<Creature> creatures = getLivingCreatures();
         if (creatures.isEmpty()) {
-            return Optional.empty();
+            return null;
         }
-        return Optional.of(creatures.get(rand.nextInt(creatures.size())));
+        return creatures.get(rand.nextInt(creatures.size()));
     }
 
     public Optional<Artifact> getArtifact(ArtifactType artifactType) {

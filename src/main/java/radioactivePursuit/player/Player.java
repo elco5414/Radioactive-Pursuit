@@ -2,14 +2,16 @@ package radioactivePursuit.player;
 
 import radioactivePursuit.interactives.Antidote;
 import radioactivePursuit.creatures.Creature;
+import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.interactives.Food;
 import radioactivePursuit.planet.Biome;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Player {
     private static Double health;
-    private static List<Antidote> antidoteList;
+    private static List<Artifact> antidoteList;
     private static PlayStrategy playerStrat;
     private static String name;
 
@@ -17,9 +19,13 @@ public class Player {
 
     private Biome currentLocation;
 
-    private Player(PlayStrategy playerStrategy) {
+    public Player(PlayStrategy playerStrategy) {
         this.health = DEFAULT_STARTING_HEALTH;
         this.playerStrat = playerStrategy;
+    }
+
+    public Player(String newName){
+        this.name = newName;
     }
 
     public String getName() {
@@ -54,14 +60,8 @@ public class Player {
         playerStrat.doAction(this);
     }
 
-    private void Builder() {
-        //put in builder methods
-        //get builder
-        //build
-    }
-
     public void eat(Food food) {
-        double healthWithFood = this.getHealth() + food.getValue();
+        double healthWithFood = this.getHealth() + food.getHealthValue();
         this.setHealth(healthWithFood);
     }
 
@@ -122,12 +122,30 @@ public class Player {
     }
 
     public void collectAntidote() {
-        Antidote antidote = currentLocation.getAntidote();
+        Optional<Artifact> potentialAntidote = currentLocation.getAntidote();
+        Artifact antidote = potentialAntidote.get();
         antidoteList.add(antidote);
     }
 
     public void useAntidote() {
         antidoteList.removeLast();
+    }
+
+    private void displayScientistArt() {
+        //fill in with the scientist ASCII character here
+        System.out.println(
+                "    (ᵔ‿ᵔ)✨\n" +
+                "    /|️🔬|\\\n" +
+                " 💉/ |  | \\\n" +
+                "    /|  |\\\n" +
+                "   /_|__|_\\\n" +
+                "     /  \\\n"
+        );
+    }
+
+    public void displayScientist() {
+        System.out.println(getName() + ": " + getAntidoteCount() + "🧪, " + getHealth() + "❤️.\n");
+        displayScientistArt();
     }
 }
 
