@@ -2,6 +2,7 @@
 package radioactivePursuit.planet;
 
 
+import radioactivePursuit.interactives.Antidote;
 import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.interactives.ArtifactType;
 import radioactivePursuit.creatures.Creature;
@@ -192,5 +193,13 @@ abstract public class Biome {
         representation += String.join("\n\t\t", getContents());
         representation += "\n";
         return representation;
+    }
+
+    public Optional<Artifact> getAntidote() {
+        Optional<Artifact> antidote = artifacts.stream()
+                .filter(artifact -> artifact.isType(ArtifactType.Antidote))
+                .findAny();
+        antidote.ifPresent(artifacts::remove);
+        return antidote;
     }
 }
