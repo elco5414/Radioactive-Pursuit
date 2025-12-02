@@ -31,6 +31,11 @@ public class Planet {
         return biomes.stream().anyMatch(Biome::hasLivingCreatures);
     }
 
+    public Boolean hasRadioActiveCreatures() {
+
+        return biomes.stream().anyMatch(Biome::hasRadioActiveCreatures);
+    }
+
     public Boolean hasLivingPlayer() {
         return biomes.stream().anyMatch(Biome::hasLivingPlayer);
     }

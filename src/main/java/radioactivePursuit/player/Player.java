@@ -147,5 +147,9 @@ public class Player {
         System.out.println(getName() + ": " + getAntidoteCount() + "🧪, " + getHealth() + "❤️.\n");
         displayScientistArt();
     }
+
+    public boolean isAlive() {
+        return health>0;
+    }
 }
 

@@ -45,7 +45,7 @@ abstract public class Biome {
     }
 
 
-    public boolean hasRadioActiveCreature() {
+    public boolean hasRadioActiveCreatures() {
         return getLivingCreatures().stream()
                 .anyMatch(Creature::isCured);
     }
