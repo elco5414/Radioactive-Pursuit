@@ -4,7 +4,7 @@ package radioactivePursuit.planet;
 
 import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.interactives.ArtifactType;
-import radioactivePursuit.interactives.Creature;
+import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.player.Player;
 
 

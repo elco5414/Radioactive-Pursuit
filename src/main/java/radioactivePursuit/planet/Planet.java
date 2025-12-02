@@ -3,7 +3,7 @@ package radioactivePursuit.planet;
 
 import org.slf4j.Logger;
 import radioactivePursuit.interactives.Artifact;
-import radioactivePursuit.interactives.Creature;
+import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.player.Player;
 
 

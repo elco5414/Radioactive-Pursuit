@@ -1,7 +1,7 @@
 package radioactivePursuit.player;
 
 import radioactivePursuit.interactives.Antidote;
-import radioactivePursuit.interactives.Creature;
+import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.interactives.Food;
 import radioactivePursuit.planet.Biome;
 

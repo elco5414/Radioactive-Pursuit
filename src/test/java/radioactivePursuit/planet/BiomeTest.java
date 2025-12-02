@@ -1,8 +1,7 @@
 package radioactivePursuit.planet;
 
 import org.junit.jupiter.api.Test;
-import radioactivePursuit.interactives.CreatureFactory;
-import radioactivePursuit.player.CurerStrategy;
+import radioactivePursuit.creatures.CreatureFactory;
 import radioactivePursuit.player.Player;
 
 import static org.junit.jupiter.api.Assertions.*;
