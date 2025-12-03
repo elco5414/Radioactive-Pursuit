@@ -11,10 +11,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlanetTest {
-    private static final Logger logger = LoggerFactory.getLogger(PlanetTest.class);
-    private final BiomeFactory biomeFactory = new BiomeFactory();
     private final ArtifactFactory artifactFactory = new ArtifactFactory();
     private final CreatureFactory creatureFactory= new CreatureFactory();
+    private final BiomeFactory biomeFactory = new BiomeFactory(artifactFactory, creatureFactory);
 
 //    @Test
 //    void testToString() {

@@ -40,14 +40,6 @@ public class Planet {
         return biomes.stream().anyMatch(Biome::hasLivingPlayer);
     }
 
-    //necessary?
-//    public Player getLivingPlayer() {
-//        for (Biome biome : biomes) {
-//            creatures.addAll(biome.getLivingCreatures());
-//        }
-//        return creatures;
-//    }
-
     public List<Creature> getLivingCreatures() {
         List<Creature> creatures = new ArrayList<>();
         for (Biome biome : biomes) {
@@ -69,13 +61,11 @@ public class Planet {
 
 
     public static class Builder {
-        //static Logger logger = org.slf4j.LoggerFactory.getLogger(Builder.class);
         final Planet planet = new Planet();
         private final Random rand = new Random();
         private final BiomeFactory biomeFactory;
         Map<String, Biome> biomeMap = new HashMap<>();
         private int currentBiomeIndex = 0;
-
 
         private Builder(BiomeFactory biomeFactory) {
             this.biomeFactory = biomeFactory;
@@ -138,18 +128,19 @@ public class Planet {
 
 
         public Builder addCreatures(List<Creature> creatures) {
-            Biome biomeToAddTo;
             for (Creature creature : creatures) {
-                switch (creature.getName()) {
-                    case "Butterfree" -> planet.biomes.stream().anyMatch(biome -> biome.isType(BiomeType.City));
-                    case "Clefairy" -> createHospitalBiome(name);
-                    case "Squirtle" -> createRiverBiome(name);
-                    case "Pikachu" -> createTrainStationBiome(name);
-                };
+                BiomeType type = creature.getPreferredBiomeType();
 
+                Biome biome = planet.biomes.stream()
+                        .filter(biomeFilter -> biomeFilter.isType(type))
+                        .findAny()
+                        .orElseThrow();
+
+                biome.add(creature);
             }
             return this;
         }
+
 
 
         public Builder addArtifacts(List<Artifact> artifacts) {

@@ -1,8 +1,10 @@
 package radioactivePursuit.creatures;
 
+import radioactivePursuit.planet.BiomeType;
+
 public class Clefairy extends Creature{
     Clefairy(String newName, Double newHealth, int newRadioActiveLevel) {
-        super(newName, newHealth, newRadioActiveLevel);
+        super(newName, newHealth, newRadioActiveLevel, BiomeType.Hospital);
     }
 
     @Override

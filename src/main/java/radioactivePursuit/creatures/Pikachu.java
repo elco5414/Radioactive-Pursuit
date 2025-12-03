@@ -1,9 +1,11 @@
 package radioactivePursuit.creatures;
 
+import radioactivePursuit.planet.BiomeType;
+
 public class Pikachu extends Creature{
 
     Pikachu(String newName, Double newHealth, int newRadioActiveLevel) {
-        super(newName, newHealth, newRadioActiveLevel);
+        super(newName, newHealth, newRadioActiveLevel, BiomeType.TrainStation);
     }
 
     @Override

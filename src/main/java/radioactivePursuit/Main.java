@@ -3,6 +3,8 @@ package radioactivePursuit;
 import java.util.Random;
 import java.util.Scanner;
 import radioactivePursuit.User.User;
+import radioactivePursuit.creatures.CreatureFactory;
+import radioactivePursuit.interactives.ArtifactFactory;
 import radioactivePursuit.planet.BiomeFactory;
 import radioactivePursuit.planet.Planet;
 import radioactivePursuit.player.Player;
@@ -11,6 +13,8 @@ public class Main {
     static private final Random rand = new Random();
     static private final int MAX_BIOMES = 5;
     static private final int MAX_ = 5;
+    private static final CreatureFactory creatureFactory = new CreatureFactory();
+    private static final ArtifactFactory artifactFactory = new ArtifactFactory();
 
     public static void main(String[] args) {
 
@@ -43,7 +47,7 @@ public class Main {
     }
 
     private static Planet worldSetUp(Player currentPlayer){
-        BiomeFactory biomeFactory = new BiomeFactory();
+        BiomeFactory biomeFactory = new BiomeFactory(artifactFactory, creatureFactory);
         int numberOfBiomes = rand.nextInt(MAX_BIOMES);
 
         // set up the world
