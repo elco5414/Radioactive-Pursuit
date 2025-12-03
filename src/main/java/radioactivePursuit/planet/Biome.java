@@ -1,7 +1,5 @@
 package radioactivePursuit.planet;
 
-
-import radioactivePursuit.interactives.Antidote;
 import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.interactives.ArtifactType;
 import radioactivePursuit.creatures.Creature;
@@ -95,8 +93,8 @@ abstract public class Biome {
         creatures.add(creature);
     }
 
-    public void add(List<Creature> creatures) {
-        creatures.addAll(creatures);
+    public void add(List<Creature> creaturesToAdd) {
+        creatures.addAll(creaturesToAdd);
     }
 
 

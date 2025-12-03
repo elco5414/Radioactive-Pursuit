@@ -1,7 +1,7 @@
 package radioactivePursuit.planet;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import radioactivePursuit.creatures.Butterfree;
 import radioactivePursuit.creatures.CreatureFactory;
 import radioactivePursuit.interactives.ArtifactFactory;
 
@@ -14,14 +14,24 @@ public class CityTest {
     CreatureFactory creatureFactory = new CreatureFactory();
     BiomeFactory biomeFactory = new BiomeFactory(artifactFactory, creatureFactory);
 
-//
-//    @Test
-//    void hasButterfree() {
-//
-//        Biome city = biomeFactory.createCityBiome("Denver");
-//
-//        assertTrue(city.contains(creatureFactory.createButterfree()));
-//
-//    }
 
+    @Test
+    void testHasCityCreatures() {
+        Biome cityBiome = biomeFactory.createCityBiome("Denver");
+
+        assertTrue(cityBiome.getLivingCreatures()
+                .stream()
+                .anyMatch(c -> c instanceof Butterfree));
+
+
+    }
+
+    @Test
+    void testHas2Food() {
+        Biome cityBiome = biomeFactory.createCityBiome("LA");
+
+        assertEquals(2, cityBiome.getFoodItems().size());
+
+
+    }
 }
