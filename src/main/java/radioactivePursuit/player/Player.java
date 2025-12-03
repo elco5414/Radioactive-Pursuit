@@ -26,6 +26,7 @@ public class Player {
 
     public Player(String newName){
         this.name = newName;
+        this.health = DEFAULT_STARTING_HEALTH;
     }
 
     public String getName() {
@@ -92,7 +93,7 @@ public class Player {
     }
 
     public boolean canFight() {
-        return this.getCurrentLocation().hasRadioActiveCreature();
+        return this.getCurrentLocation().hasRadioActiveCreatures();
     }
 
     public boolean canMove() {
@@ -149,7 +150,7 @@ public class Player {
     }
 
     public boolean isAlive() {
-        return health>0;
+        return health > 0;
     }
 }
 

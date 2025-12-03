@@ -3,8 +3,6 @@ package radioactivePursuit;
 import java.util.Random;
 import java.util.Scanner;
 import radioactivePursuit.User.User;
-import radioactivePursuit.creatures.CreatureFactory;
-import radioactivePursuit.interactives.ArtifactFactory;
 import radioactivePursuit.planet.BiomeFactory;
 import radioactivePursuit.planet.Planet;
 import radioactivePursuit.player.Player;
@@ -56,17 +54,24 @@ public class Main {
         return Planet.getNewBuilder(biomeFactory)
                 .createBiomes(numberOfBiomes)
                 .connectCirclePlanet()
+                .add(currentPlayer)
                 .build();
     }
 
     // run the game
-    private void playGame(){
+    private static void playGame(){
         //game play for each turn
         //whenever the menu for options is displayed, set the player strategy based on that user input!
+        //call display function
+    }
 
+    private static void openingDisplay(){
+        //fill in the background story here...
+        System.out.println("background .... story ...\n");
     }
 
     private static void finalDisplay() {
+
     }
 
     private static boolean gameIsNotOver(Player scientist, Planet currentPlanet) {

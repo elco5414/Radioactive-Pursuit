@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class MenuDisplay {
+public class Display {
     Map<String, Boolean> menuOptions = new HashMap<>();
 
     private void instantiateMenuOptions(Biome currentBiome, Player currentPlayer) {
@@ -47,6 +47,14 @@ public class MenuDisplay {
                 System.out.println("Invalid option. Please try again.");
             }
         }
+
+    }
+
+    public void DisplayMap(){
+
+    }
+
+    public void turnDisplay(){
 
     }
 

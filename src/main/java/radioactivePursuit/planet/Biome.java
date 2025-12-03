@@ -75,8 +75,11 @@ abstract public class Biome {
 
     public void addNeighbor(Biome neighbor) {
         // Make sure we are never a neighbor of ourselves
-        if (this != neighbor) {
+        if (this == neighbor) return;
+        if (!this.neighbors.contains(neighbor)) {
             this.neighbors.add(neighbor);
+        }
+        if (!neighbor.neighbors.contains(this)) {
             neighbor.addNeighbor(this);
         }
     }

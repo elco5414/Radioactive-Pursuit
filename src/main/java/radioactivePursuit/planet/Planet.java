@@ -1,7 +1,7 @@
 package radioactivePursuit.planet;
 
 
-import org.slf4j.Logger;
+//import org.slf4j.Logger;
 import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.player.Player;
@@ -69,7 +69,7 @@ public class Planet {
 
 
     public static class Builder {
-        static Logger logger = org.slf4j.LoggerFactory.getLogger(Builder.class);
+        //static Logger logger = org.slf4j.LoggerFactory.getLogger(Builder.class);
         final Planet planet = new Planet();
         private final Random rand = new Random();
         private final BiomeFactory biomeFactory;
@@ -131,8 +131,8 @@ public class Planet {
         }
 
 
-        public Builder add(Creature creature) {
-            nextBiome().add(creature);
+        public Builder add(Player player) {
+            nextBiome().add(player);
             return this;
         }
 
@@ -157,13 +157,13 @@ public class Planet {
             assert planet.size() > 0;
             for (Biome biome : planet.biomes) {
                 if (biome.numberOfNeighbors() == 0) {
-                    logger.warn("Biome {} has no neighbors. Connecting it to another biome.", biome.getName());
+                    //logger.warn("Biome {} has no neighbors. Connecting it to another biome.", biome.getName());
                     biome.addNeighbor(nextBiome());
                 }
             }
 
             if (!planet.hasLivingPlayer()) {
-                logger.error("No Player created. Terminating game.");
+                //logger.error("No Player created. Terminating game.");
                 throw new IllegalStateException("No Player created. Terminating game.");
             }
             return planet;
