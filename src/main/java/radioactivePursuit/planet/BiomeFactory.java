@@ -67,7 +67,7 @@ public class BiomeFactory {
         biome.add(artifactFactory.create(ArtifactType.Food));
         biome.add(artifactFactory.create(ArtifactType.Food));
 
-        biome.add(creatureFactory.createCityBiomeCreatures(1));
+        biome.add(creatureFactory.createButterfree());
         return biome;
     }
 
@@ -77,7 +77,7 @@ public class BiomeFactory {
         biome.add(artifactFactory.create(ArtifactType.Antidote));
         biome.add(artifactFactory.create(ArtifactType.Antidote));
 
-        biome.add(creatureFactory.createHospitalBiomeCreatures(1));
+        biome.add(creatureFactory.createClefairy());
         return biome;
 
     }
@@ -85,7 +85,7 @@ public class BiomeFactory {
     Biome createRiverBiome(String name) {
         Biome biome = new RiverBiome(name);
 
-        biome.add(creatureFactory.createRiverBiomeCreatures(1));
+        biome.add(creatureFactory.createSquirtle());
 
         return biome;
     }
@@ -95,7 +95,7 @@ public class BiomeFactory {
 
         biome.add(artifactFactory.create(ArtifactType.Antidote));
 
-        biome.add(creatureFactory.createTrainStationBiomeCreatures(1));
+        biome.add(creatureFactory.createPikachu());
         return biome;
     }
 

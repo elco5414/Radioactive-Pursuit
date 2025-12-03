@@ -74,8 +74,11 @@ public class Player {
         return currentLocation;
     }
 
+    // jacey changed here
     public void setCurrentLocation(Biome biome) {
+        currentLocation.remove(this);
         currentLocation = biome;
+        currentLocation.enterBiome(this);
     }
 
     public void fight(Creature creature) {

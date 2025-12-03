@@ -91,8 +91,6 @@ abstract public class Biome {
         return neighbors.stream().toList().get(rand.nextInt(neighbors.size()));
     }
 
-
-    // might have to change enter room functionality
     public void add(Creature creature) {
         creatures.add(creature);
     }
@@ -123,7 +121,6 @@ abstract public class Biome {
     public void enterBiome(Player player) {
         add(player);
     }
-
 
     public int numberOfNeighbors() {
         return neighbors.size();
@@ -169,14 +166,6 @@ abstract public class Biome {
     public boolean hasAntidote() {
         return artifacts.stream()
                 .anyMatch(artifact -> artifact.isType(ArtifactType.Antidote));
-    }
-
-    public Optional<Artifact> getAnitdote() {
-        Optional<Artifact> antidote = artifacts.stream()
-                .filter(artifact -> artifact.isType(ArtifactType.Antidote))
-                .findAny();
-        antidote.ifPresent(artifacts::remove);
-        return antidote;
     }
 
     public List<Artifact> getAntidoteItems() {
