@@ -199,14 +199,6 @@ abstract public class Biome {
                 .findAny();
     }
 
-
-    public String toString() {
-        String representation = "\t" + name + ":\n\t\t";
-        representation += String.join("\n\t\t", getContents());
-        representation += "\n";
-        return representation;
-    }
-
     public Optional<Artifact> getAntidote() {
         Optional<Artifact> antidote = artifacts.stream()
                 .filter(artifact -> artifact.isType(ArtifactType.Antidote))
@@ -214,4 +206,9 @@ abstract public class Biome {
         antidote.ifPresent(artifacts::remove);
         return antidote;
     }
+
+    public String displayBiome() {
+        return "";
+    }
+
 }
