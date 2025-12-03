@@ -1,10 +1,16 @@
 package radioactivePursuit.planet;
 
+import radioactivePursuit.creatures.CreatureFactory;
+import radioactivePursuit.interactives.ArtifactFactory;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class BiomeFactory {
+
+    private final CreatureFactory creatureFactory;
+    private final ArtifactFactory artifactFactory;
 
     private static final BiomeType[] biomeTypes = BiomeType.values();
     public static String[] CITY_NAMES = new String[]{"Oakridge", "Silverport", "Riverview", "Brookstone", "Clearwater", "Northgate"};
@@ -20,6 +26,11 @@ public class BiomeFactory {
         NAMES.put(BiomeType.TrainStation, TRAIN_STATION_NAMES);
     }
 
+    public BiomeFactory (CreatureFactory creatureFactory, ArtifactFactory artifactFactory) {
+        this.creatureFactory = creatureFactory;
+        this.artifactFactory = artifactFactory;
+    }
+
     Random random = new Random();
 
     Biome createBiome(String name) {
@@ -27,10 +38,10 @@ public class BiomeFactory {
         BiomeType randomType = biomeTypes[randomIndex];
 
         return switch (randomType) {
-            case City -> new CityBiome(name);
-            case Hospital -> new HospitalBiome(name);
-            case River -> new RiverBiome(name);
-            case TrainStation -> new TrainStationBiome((name));
+            case City -> createCityBiome(name);
+            case Hospital -> createHospitalBiome(name);
+            case River -> createRiverBiome(name);
+            case TrainStation -> createTrainStationBiome(name);
         };
 
     }
@@ -42,10 +53,10 @@ public class BiomeFactory {
         String name = getRandomName(randomType);
 
         return switch (randomType) {
-            case City -> new CityBiome(name);
-            case Hospital -> new HospitalBiome(name);
-            case River -> new RiverBiome(name);
-            case TrainStation -> new TrainStationBiome((name));
+            case City -> createCityBiome(name);
+            case Hospital -> createHospitalBiome(name);
+            case River -> createRiverBiome(name);
+            case TrainStation -> createTrainStationBiome(name);
         };
     }
 

@@ -138,8 +138,15 @@ public class Planet {
 
 
         public Builder addCreatures(List<Creature> creatures) {
+            Biome biomeToAddTo;
             for (Creature creature : creatures) {
-                nextBiome().add(creature);
+                switch (creature.getName()) {
+                    case "Butterfree" -> planet.biomes.stream().anyMatch(biome -> biome.isType(BiomeType.City));
+                    case "Clefairy" -> createHospitalBiome(name);
+                    case "Squirtle" -> createRiverBiome(name);
+                    case "Pikachu" -> createTrainStationBiome(name);
+                };
+
             }
             return this;
         }
