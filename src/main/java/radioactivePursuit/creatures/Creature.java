@@ -1,9 +1,9 @@
 package radioactivePursuit.creatures;
 
 abstract public class Creature {
-    private static Double health;
-    private static int radioActiveLevel;
-    private static String name;
+    private Double health;
+    private int radioActiveLevel;
+    private String name;
 
     Creature(String newName, Double newHealth, int newRadioActiveLevel) {
         this.name = newName;
