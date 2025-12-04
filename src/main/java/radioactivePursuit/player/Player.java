@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Player {
     private static Double health;
-    private static List<Artifact> antidoteList;
+    private List<Artifact> antidoteList = new ArrayList<>();
     private static PlayStrategy playerStrat;
     private static String name;
     static private final Random rand = new Random();
@@ -99,12 +99,15 @@ public class Player {
     public void fight(Creature creature) {
         double creatureHealth = creature.getHealth();
         if (creatureHealth == health) {
+            System.out.println("Equal health");
             creature.setHealth(creatureHealth - 1);
             setHealth(health - 1);
         } else if (creatureHealth >= health) {
+            System.out.println("creature grreater");
             double differenceInHealth = creatureHealth - health;
             setHealth(health - differenceInHealth);
         } else {
+            System.out.println("you greater");
             double differenceInHealth = health - creatureHealth;
             creature.setHealth(creatureHealth - differenceInHealth);
         }
@@ -147,7 +150,9 @@ public class Player {
     }
 
     public void useAntidote() {
-        antidoteList.removeLast();
+        Artifact lastAntidote = antidoteList.getLast();
+        //TO-DO: fix this
+        antidoteList.remove(lastAntidote);
     }
 
     public void displayScientistArt() {

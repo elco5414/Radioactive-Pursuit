@@ -20,6 +20,7 @@ abstract public class Creature {
     }
 
     public boolean isCured() {
+        System.out.println("is cured: " + (getRadioActiveLevel() <= 0));
         return getRadioActiveLevel() <= 0;
     }
 

@@ -11,7 +11,7 @@ import java.util.*;
 public class Display {
     static Map<String, Boolean> menuOptions = new HashMap<>();
 
-    public static void instantiateMenuOptions(Biome currentBiome, Player currentPlayer) {
+    public static void instantiateMenuOptions(Player currentPlayer) {
         if (currentPlayer.canMove()) {
             menuOptions.put("Move Biomes", false);
         }
@@ -30,8 +30,9 @@ public class Display {
         menuOptions.put("See Map",false);
     }
 
-    public static void displayOptionMenu() {
+    public static String displayOptionMenu() {
         Scanner sc = new Scanner(System.in);
+        String userChoice;
 
         System.out.println("What would you like to do next?\n");
         for (String option : menuOptions.keySet()) {
@@ -39,7 +40,7 @@ public class Display {
         }
         while (true) {
             System.out.print("\nEnter your choice: ");
-            String userChoice = sc.nextLine().trim();
+            userChoice = sc.nextLine().trim();
 
             if (menuOptions.containsKey(userChoice)) {
                 menuOptions.put(userChoice, true);
@@ -49,7 +50,7 @@ public class Display {
                 System.out.println("Invalid option. Please try again.");
             }
         }
-
+        return userChoice;
     }
 
     public static void setPlayerStrategyBasedOnInput(Player player)
@@ -80,26 +81,11 @@ public class Display {
                 } else if ("See Map".equals(chosenOption)) {
                     DisplayMap();
                 }
-
                 break;
             }
         }
     }
 
-    public static void handleInpput(String userChoice)
-    {
-        System.out.println("input handled\n");
-        //set whatever the user entered as true on the map, and execute that
-        String cleanedChoice = userChoice.trim();
-
-        if (menuOptions.containsKey(cleanedChoice)) {
-            menuOptions.put(cleanedChoice, true);
-
-            System.out.println("Option '" + cleanedChoice + "' selected and executed\n.");
-        } else {
-            System.out.println("Input '" + cleanedChoice + "' is not a valid menu option.\n");
-        }
-    }
 
     public static void DisplayMap(){
         //TO-DO, print a cute version of the map of biomes that includes where the player is right now, maybe what is in the biomes, TBD
@@ -107,12 +93,10 @@ public class Display {
 
     public static void turnDisplay(Player player, Planet planet){
         //TO-DO: clean up this function fs
-        //not currently in final printing stage, just to get info out right now
         player.displayScientist();
         player.getCurrentLocation().displayBiome();
 
-        //TO-DO: find a way to display the creatures within the biome, where is that
-        // and antidotes and foods as well
+        //TO-DO: find a way to display the creatures within the biome, where is that and artifacts
         List<Creature> creaturesInBiome = player.getCurrentLocation().getLivingCreatures();
         List<Artifact> artifactsInBiome = player.getCurrentLocation().getArtifacts();
 

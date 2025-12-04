@@ -7,7 +7,6 @@ import radioactivePursuit.User.Display;
 import radioactivePursuit.User.User;
 import radioactivePursuit.creatures.CreatureFactory;
 import radioactivePursuit.interactives.ArtifactFactory;
-import radioactivePursuit.planet.Biome;
 import radioactivePursuit.planet.BiomeFactory;
 import radioactivePursuit.planet.Planet;
 import radioactivePursuit.player.Player;
@@ -15,23 +14,21 @@ import radioactivePursuit.player.Player;
 public class Main {
     static private final Random rand = new Random();
     static private final int MAX_BIOMES = 7;
-    static private final int MAX_ = 5;
     private static final CreatureFactory creatureFactory = new CreatureFactory();
     private static final ArtifactFactory artifactFactory = new ArtifactFactory();
     private static final Display display = new Display();
 
     public static void main(String[] args) {
 
-        //setting everything up for game play
         User currentUser = userSetUp();
         Player currentPlayer = new Player(currentUser.getName());
         Planet currentPlanet = worldSetUp(currentPlayer);
 
         openingDisplay(currentPlayer);
-        //while loop to actually play the game
+
         while(gameIsNotOver(currentPlayer, currentPlanet)){
-            Display.turnDisplay(currentPlayer, currentPlanet);
-            playGame(currentPlayer.getCurrentLocation() ,currentPlayer);
+            display.turnDisplay(currentPlayer, currentPlanet);
+            playGame(currentPlayer);
         }
 
         Main.finalDisplay();
@@ -55,7 +52,6 @@ public class Main {
     private static Planet worldSetUp(Player currentPlayer){
         BiomeFactory biomeFactory = new BiomeFactory(artifactFactory, creatureFactory);
 
-        //TO-DO: change so that biome handles all generation of artifacts
         return Planet.getNewBuilder(biomeFactory)
                 .createBiomes(MAX_BIOMES)
                 .connectCirclePlanet()
@@ -64,14 +60,11 @@ public class Main {
     }
 
 
-    private static void playGame(Biome currentBiome, Player currentPlayer){
+    private static void playGame(Player currentPlayer){
 
-        Display.instantiateMenuOptions(currentBiome,currentPlayer); //set the menu options that are available
-        Display.displayOptionMenu(); //show the player the menu and then collect what they say
-        Scanner sc = new Scanner(System.in);
-        String userChoice = sc.nextLine();
-        Display.handleInpput(userChoice);
-        Display.setPlayerStrategyBasedOnInput(currentPlayer);
+        display.instantiateMenuOptions(currentPlayer);
+        String userChoice = display.displayOptionMenu();
+        display.setPlayerStrategyBasedOnInput(currentPlayer);
 
     }
 

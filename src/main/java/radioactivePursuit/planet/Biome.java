@@ -44,8 +44,13 @@ abstract public class Biome {
 
 
     public boolean hasRadioActiveCreatures() {
-        return getLivingCreatures().stream()
+        System.out.println("get living creatures" + getLivingCreatures());
+        boolean check = getLivingCreatures().stream()
                 .anyMatch(creature -> !creature.isCured());
+        System.out.println("biome" + check);
+        return check;
+//        return getLivingCreatures().stream()
+//                .anyMatch(creature -> !creature.isCured());
     }
 
     public List<Creature> getLivingCreatures() {

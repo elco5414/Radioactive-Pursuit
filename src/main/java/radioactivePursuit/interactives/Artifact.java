@@ -20,8 +20,4 @@ abstract public class Artifact {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
 }

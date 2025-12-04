@@ -50,23 +50,15 @@ public class ArtifactFactory {
     }
 
     public Artifact create(ArtifactType type) {
-        return create(type, getRandomName(type), getRandomValue(), getRandomValue());
+        return create(type, getRandomName(type), getRandomValue());
     }
 
 
-    public Artifact create(ArtifactType type, String name, double healthValue, double cureStrength) {
+    public Artifact create(ArtifactType type, String name, double healthValue) {
         return switch (type) {
             case Food -> new Food(name, healthValue);
-            case Antidote -> new Antidote(name, cureStrength);
+            case Antidote -> new Antidote(name);
         };
-    }
-
-    public Artifact createFood(String name) {
-        return create(ArtifactType.Food, name, getRandomValue(), getRandomValue());
-    }
-
-    public Artifact createFood(String name, double value) {
-        return create(ArtifactType.Food, name, value, getRandomValue());
     }
 
 }

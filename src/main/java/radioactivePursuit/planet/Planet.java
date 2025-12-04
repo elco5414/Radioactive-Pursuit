@@ -32,8 +32,10 @@ public class Planet {
     }
 
     public Boolean hasRadioActiveCreatures() {
-
-        return biomes.stream().anyMatch(Biome::hasRadioActiveCreatures);
+        System.out.println("biomes in planet has creatyres" + biomes);
+        Boolean check = biomes.stream().anyMatch(Biome::hasRadioActiveCreatures);
+        System.out.println("planet" + check);
+        return check;
     }
 
     public Boolean hasLivingPlayer() {
