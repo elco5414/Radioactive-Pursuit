@@ -1,7 +1,5 @@
 package radioactivePursuit.planet;
 
-
-//import org.slf4j.Logger;
 import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.player.Player;
@@ -54,14 +52,6 @@ public class Planet {
         return List.copyOf(biomes);
     }
 
-    public Biome getBiome(String biomeName) {
-        return biomes.stream()
-                .filter(biome -> biome.getName().equals(biomeName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No biome with name " + biomeName));
-    }
-
-
     public static class Builder {
         final Planet planet = new Planet();
         private final Random rand = new Random();
@@ -73,16 +63,9 @@ public class Planet {
             this.biomeFactory = biomeFactory;
         }
 
-
         private Biome nextBiome() {
             return planet.getBiomes().get(currentBiomeIndex++ % planet.getBiomes().size());
         }
-
-
-        private Biome getRandomBiome() {
-            return planet.biomes.get(rand.nextInt(planet.biomes.size()));
-        }
-
 
         public Builder createBiomes(int numberOfBiomes) {
             planet.biomes = new ArrayList<>();
@@ -120,14 +103,6 @@ public class Planet {
         }
 
 
-        public Builder addArtifacts(List<Artifact> artifacts) {
-            for (Artifact artifact : artifacts) {
-                nextBiome().add(artifact);
-            }
-            return this;
-        }
-
-
         public Planet build() {
             assert planet.size() > 0;
             for (Biome biome : planet.biomes) {
@@ -143,27 +118,6 @@ public class Planet {
             }
             return planet;
         }
-
-
-
-        // not sure if this will affect use, without character class it works a little different.
-        // Might have to change how player is added to room
-        public Builder addToBiome(String biomeName, Player player) {
-            getBiome(biomeName).add(player);
-            return this;
-        }
-
-
-        public Builder addToBiome(String biomeName, Artifact artifact) {
-            getBiome(biomeName).add(artifact);
-            return this;
-        }
-
-
-        public Biome getBiome(String biomeName) {
-            return biomeMap.get(biomeName);
-        }
-
     }
 
 

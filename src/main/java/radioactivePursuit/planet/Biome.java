@@ -34,9 +34,6 @@ abstract public class Biome {
         return name;
     }
 
-    public boolean isType(BiomeType type) {
-        return this.type == type;
-    }
 
     public boolean hasLivingCreatures() {
         return !getLivingCreatures().isEmpty();
@@ -64,26 +61,8 @@ abstract public class Biome {
                 .toList();
     }
 
-    //change to get Player if in room as singleton
-    //TO-DO (possibly): i think we dont need this function?
-    public List<String> getContents() {
-        List<String> characterStrings = new ArrayList<>(getLivingCreatures().stream()
-                .map(Object::toString)
-                .toList());
-
-        for (Artifact artifact : artifacts) {
-            characterStrings.add(artifact.toString());
-        }
-
-        if (hasPlayer) {
-            characterStrings.add(player.toString());
-        }
-
-        return characterStrings;
-    }
-
     public void addNeighbor(Biome neighbor) {
-        // Make sure we are never a neighbor of ourselves
+
         if (this == neighbor) return;
         if (!this.neighbors.contains(neighbor)) {
             this.neighbors.add(neighbor);
@@ -113,11 +92,6 @@ abstract public class Biome {
         this.player = player;
     }
 
-    //TO-DO (possibly): think we dont neeed this
-    public void remove(Creature creature) {
-        creatures.remove(creature);
-    }
-
     public void remove(Player player) {
         this.player = null;
         hasPlayer = false;
@@ -133,14 +107,6 @@ abstract public class Biome {
 
     public boolean hasNeighbors() {
         return !neighbors.isEmpty();
-    }
-
-    public boolean contains(Creature creature) {
-        return creatures.contains(creature);
-    }
-
-    public boolean contains(Artifact artifact) {
-        return artifacts.contains(artifact);
     }
 
     public boolean hasLivingPlayer() {
@@ -185,12 +151,6 @@ abstract public class Biome {
             return null;
         }
         return creatures.get(rand.nextInt(creatures.size()));
-    }
-
-    public Optional<Artifact> getArtifact(ArtifactType artifactType) {
-        return artifacts.stream()
-                .filter(artifact -> artifact.isType(artifactType))
-                .findAny();
     }
 
     public Optional<Artifact> getAntidote() {

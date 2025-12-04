@@ -14,7 +14,7 @@ public class BiomeFactory {
     private final CreatureFactory creatureFactory;
 
     private static final BiomeType[] biomeTypes = BiomeType.values();
-    public static String[] CITY_NAMES = new String[]{"Oakridge", "Silverport", "Riverview", "Brookstone", "Clearwater", "Northgate"};
+    public static String[] CITY_NAMES = new String[]{"Oakridge", "Silverport", "Brookstone", "Denver", "Northgate"};
     public static String[] HOSPITAL_NAMES = new String[]{"Central General Hospital", "Riverside Medical Center", "Westview Health Clinic", "Greenfield Medical Plaza", "Lakeside Regional Hospital", "Hillcrest Medical Center"};
     public static String[] RIVER_NAMES = new String[]{"Pine River", "Maple Creek", "Silver Run", "Clearwater Stream", "Eastridge River", "Northbend Creek"};
     public static String[] TRAIN_STATION_NAMES = new String[]{"Eastline Station", "Harbor Central", "North Junction", "Union Transit Hub", "Ridgeview Station", "Metro West Terminal"};
