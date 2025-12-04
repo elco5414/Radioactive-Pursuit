@@ -7,8 +7,8 @@ public class RiverBiome extends Biome {
     }
 
     @Override
-    public String displayBiome() {
-        return (
+    public void displayBiome() {
+        System.out.println(
                                                                         "\n" +
                         "    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀        ⢀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀\n" +
                         "            ⠀⠀⠀⣀⣤⣴⣶⣶⣶⣦⣤⣀⠀⠀⠀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⡀⠀⠀\n" +

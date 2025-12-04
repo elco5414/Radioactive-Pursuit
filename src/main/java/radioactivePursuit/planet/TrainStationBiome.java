@@ -7,9 +7,9 @@ public class TrainStationBiome extends Biome {
     }
 
     @Override
-    public String displayBiome() {
+    public void displayBiome() {
 
-        return (
+        System.out.println(
                 "               .---._\n" +
                         "           .--(. '  .).--.      . .-.\n" +
                         "        . ( ' _) .)` (   .)-. ( ) '-'\n" +

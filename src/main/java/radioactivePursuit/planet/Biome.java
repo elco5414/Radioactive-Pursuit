@@ -196,8 +196,9 @@ abstract public class Biome {
         return antidote;
     }
 
-    public String displayBiome() {
-        return "";
+    public void displayBiome() {
+        // Should never happen
+        System.out.println("Display base biome.");
     }
 
 }

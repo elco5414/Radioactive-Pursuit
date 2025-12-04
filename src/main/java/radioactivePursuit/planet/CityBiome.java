@@ -7,9 +7,9 @@ public class CityBiome extends Biome {
     }
 
     @Override
-    public String displayBiome() {
+    public void displayBiome() {
 
-        return (
+            System.out.println(
                     "                                  _._\n" +
                             "                               .-~ | ~-.\n" +
                             "                               |   |   |\n" +
