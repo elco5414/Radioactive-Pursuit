@@ -2,7 +2,6 @@ package radioactivePursuit.User;
 
 import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.interactives.Artifact;
-import radioactivePursuit.planet.Biome;
 import radioactivePursuit.planet.Planet;
 import radioactivePursuit.player.*;
 
@@ -30,7 +29,7 @@ public class Display {
         menuOptions.put("See Map",false);
     }
 
-    public static String displayOptionMenu() {
+    public static void displayOptionMenuAndSetUserChoice() {
         Scanner sc = new Scanner(System.in);
         String userChoice;
 
@@ -50,33 +49,27 @@ public class Display {
                 System.out.println("Invalid option. Please try again.");
             }
         }
-        return userChoice;
     }
 
-    public static void setPlayerStrategyBasedOnInput(Player player)
+    public static PlayStrategy getPlayerStrategy(Player player)
     {
         for (Map.Entry<String, Boolean> entry : menuOptions.entrySet()) {
             if (entry.getValue() == true) {
                 String chosenOption = entry.getKey();
                 if ("Move Biomes".equals(chosenOption)) {
-                    player.setPlayStrategy(new MoverStrategy());
-                    player.doAction();
+                    return new MoverStrategy();
 
                 } else if ("Eat Food".equals(chosenOption)) {
-                    player.setPlayStrategy(new MuncherStrategy());
-                    player.doAction();
+                    return new MuncherStrategy();
 
                 } else if ("Fight Creature".equals(chosenOption)) {
-                    player.setPlayStrategy(new FighterStrategy());
-                    player.doAction();
+                    return new FighterStrategy();
 
                 } else if ("Collect Antidote".equals(chosenOption)) {
-                    player.setPlayStrategy(new CollectingAntidoteStrategy());
-                    player.doAction();
+                    return new CollectingAntidoteStrategy();
 
                 } else if ("Cure Creature".equals(chosenOption)) {
-                    player.setPlayStrategy(new CurerStrategy());
-                    player.doAction();
+                   return new CurerStrategy();
 
                 } else if ("See Map".equals(chosenOption)) {
                     DisplayMap();
@@ -88,15 +81,15 @@ public class Display {
 
 
     public static void DisplayMap(){
-        //TO-DO, print a cute version of the map of biomes that includes where the player is right now, maybe what is in the biomes, TBD
+        //TODO, print a cute version of the map of biomes that includes where the player is right now, maybe what is in the biomes, TBD
     }
 
     public static void turnDisplay(Player player, Planet planet){
-        //TO-DO: clean up this function fs
+        //TODO: clean up this function fs
         player.displayScientist();
         player.getCurrentLocation().displayBiome();
 
-        //TO-DO: find a way to display the creatures within the biome, where is that and artifacts
+        //TODO: find a way to display the creatures within the biome, where is that and artifacts
         List<Creature> creaturesInBiome = player.getCurrentLocation().getLivingCreatures();
         List<Artifact> artifactsInBiome = player.getCurrentLocation().getArtifacts();
 
@@ -104,7 +97,7 @@ public class Display {
             creature.displayCreature();
         }
         for(Artifact artifact: artifactsInBiome){
-            //TO-DO: clean this, change the function in Biome to just return names maybe in a list..?
+            //TODO: clean this, change the function in Biome to just return names maybe in a list..?
             System.out.println(artifact.getName());
         }
 

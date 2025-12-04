@@ -122,7 +122,7 @@ public class Player {
     }
 
     public void move() {
-        //TO-DO: update to the next biome
+        //TODO: update to the next biome
     }
 
     public boolean canCure(Creature creature) {
@@ -151,7 +151,7 @@ public class Player {
 
     public void useAntidote() {
         Artifact lastAntidote = antidoteList.getLast();
-        //TO-DO: fix this
+        //TODO: fix this
         antidoteList.remove(lastAntidote);
     }
 

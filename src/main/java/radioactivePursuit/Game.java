@@ -1,6 +1,5 @@
 package radioactivePursuit;
 
-import java.util.Random;
 import java.util.Scanner;
 
 import radioactivePursuit.User.Display;
@@ -9,10 +8,11 @@ import radioactivePursuit.creatures.CreatureFactory;
 import radioactivePursuit.interactives.ArtifactFactory;
 import radioactivePursuit.planet.BiomeFactory;
 import radioactivePursuit.planet.Planet;
+import radioactivePursuit.player.PlayStrategy;
 import radioactivePursuit.player.Player;
 
-public class Main {
-    static private final Random rand = new Random();
+public class Game {
+    //TODO instance of game
     static private final int MAX_BIOMES = 7;
     private static final CreatureFactory creatureFactory = new CreatureFactory();
     private static final ArtifactFactory artifactFactory = new ArtifactFactory();
@@ -20,18 +20,23 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // TODO make instance variables
         User currentUser = userSetUp();
         Player currentPlayer = new Player(currentUser.getName());
         Planet currentPlanet = worldSetUp(currentPlayer);
 
-        openingDisplay(currentPlayer);
+        printIntro(currentPlayer);
 
+        playGame(currentPlayer, currentPlanet);
+
+        finalDisplay();
+    }
+
+    public static void playGame(Player currentPlayer, Planet currentPlanet) {
         while(gameIsNotOver(currentPlayer, currentPlanet)){
             display.turnDisplay(currentPlayer, currentPlanet);
-            playGame(currentPlayer);
+            playTurn(currentPlayer);
         }
-
-        Main.finalDisplay();
     }
 
     //method to instantiate user and grab their info
@@ -49,7 +54,7 @@ public class Main {
         return currentUser;
     }
 
-    private static Planet worldSetUp(Player currentPlayer){
+    static Planet worldSetUp(Player currentPlayer){
         BiomeFactory biomeFactory = new BiomeFactory(artifactFactory, creatureFactory);
 
         return Planet.getNewBuilder(biomeFactory)
@@ -60,15 +65,18 @@ public class Main {
     }
 
 
-    private static void playGame(Player currentPlayer){
-
+    static void getUserChoice(Player currentPlayer){
         display.instantiateMenuOptions(currentPlayer);
-        String userChoice = display.displayOptionMenu();
-        display.setPlayerStrategyBasedOnInput(currentPlayer);
-
+        display.displayOptionMenuAndSetUserChoice();
     }
 
-    private static void openingDisplay(Player player){
+    static void playTurn(Player currentPlayer){
+        PlayStrategy newStrategy = display.getPlayerStrategy(currentPlayer);
+        currentPlayer.setPlayStrategy(newStrategy);
+        currentPlayer.doAction();
+    }
+
+    private static void printIntro(Player player){
         //fill in the background story here...
         System.out.println("Many decades ago, Earth fell silent. A chain of nuclear failures poisoned the land, twisted the wildlife, and forced humanity to flee. A handful of scientists escaped into orbit, watching their home decay from above while they struggled to survive.\n" +
                 "\n" +
@@ -87,15 +95,13 @@ public class Main {
                 "Earth is broken, but hope has landed with you.");
 
         System.out.println("Would you like to continue? (yes)\n");
-        Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
     }
 
     private static void finalDisplay() {
 
     }
 
-    private static boolean gameIsNotOver(Player scientist, Planet currentPlanet) {
+    static boolean gameIsNotOver(Player scientist, Planet currentPlanet) {
         if(!scientist.isAlive()){  //check that the player is alive
             return false;
         }else if(!currentPlanet.hasRadioActiveCreatures()){ //check that there are no living uncured creatures

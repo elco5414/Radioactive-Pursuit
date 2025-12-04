@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 
 public class Planet {
-    private static List<Biome> biomes;
+    private List<Biome> biomes;
 
     public static Builder getNewBuilder(BiomeFactory biomeFactory) {
         return new Builder(biomeFactory);
@@ -69,7 +69,7 @@ public class Planet {
 
         public Builder createBiomes(int numberOfBiomes) {
             planet.biomes = new ArrayList<>();
-            IntStream.range(2, numberOfBiomes).forEach(_ -> {
+            IntStream.range(0, numberOfBiomes).forEach(_ -> {
                 Biome currentBiome = biomeFactory.createBiome();
                 biomeMap.put(currentBiome.getName(), currentBiome);
                 planet.biomes.add(currentBiome);

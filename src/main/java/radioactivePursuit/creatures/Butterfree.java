@@ -9,7 +9,7 @@ public class Butterfree extends Creature{
 
     @Override
     public void displayCreature(){
-        //TO-DO: why are the names wrong?
+        //TODO: why are the names wrong?
         System.out.println(super.getName()+ ": "+ super.getRadioActiveLevel() + "☢️ " + super.getHealth() + "❤️ \n");
         if(getRadioActiveLevel() == 0){
             System.out.println("    .==-.                   .-==.");
