@@ -63,14 +63,15 @@ public class Main {
                 .build();
     }
 
-    // run the game
+
     private static void playGame(Biome currentBiome, Player currentPlayer){
 
         Display.instantiateMenuOptions(currentBiome,currentPlayer); //set the menu options that are available
         Display.displayOptionMenu(); //show the player the menu and then collect what they say
         Scanner sc = new Scanner(System.in);
         String userChoice = sc.nextLine();
-
+        Display.handleInpput(userChoice);
+        Display.setPlayerStrategyBasedOnInput(currentPlayer);
 
     }
 

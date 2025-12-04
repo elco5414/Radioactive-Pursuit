@@ -4,7 +4,7 @@ import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.planet.Biome;
 import radioactivePursuit.planet.Planet;
-import radioactivePursuit.player.Player;
+import radioactivePursuit.player.*;
 
 import java.util.*;
 
@@ -52,8 +52,57 @@ public class Display {
 
     }
 
-    public void DisplayMap(){
+    public static void setPlayerStrategyBasedOnInput(Player player)
+    {
+        for (Map.Entry<String, Boolean> entry : menuOptions.entrySet()) {
+            if (entry.getValue() == true) {
+                String chosenOption = entry.getKey();
+                if ("Move Biomes".equals(chosenOption)) {
+                    player.setPlayStrategy(new MoverStrategy());
+                    player.doAction();
 
+                } else if ("Eat Food".equals(chosenOption)) {
+                    player.setPlayStrategy(new MuncherStrategy());
+                    player.doAction();
+
+                } else if ("Fight Creature".equals(chosenOption)) {
+                    player.setPlayStrategy(new FighterStrategy());
+                    player.doAction();
+
+                } else if ("Collect Antidote".equals(chosenOption)) {
+                    player.setPlayStrategy(new CollectingAntidoteStrategy());
+                    player.doAction();
+
+                } else if ("Cure Creature".equals(chosenOption)) {
+                    player.setPlayStrategy(new CurerStrategy());
+                    player.doAction();
+
+                } else if ("See Map".equals(chosenOption)) {
+                    DisplayMap();
+                }
+
+                break;
+            }
+        }
+    }
+
+    public static void handleInpput(String userChoice)
+    {
+        System.out.println("input handled\n");
+        //set whatever the user entered as true on the map, and execute that
+        String cleanedChoice = userChoice.trim();
+
+        if (menuOptions.containsKey(cleanedChoice)) {
+            menuOptions.put(cleanedChoice, true);
+
+            System.out.println("Option '" + cleanedChoice + "' selected and executed\n.");
+        } else {
+            System.out.println("Input '" + cleanedChoice + "' is not a valid menu option.\n");
+        }
+    }
+
+    public static void DisplayMap(){
+        //TO-DO, print a cute version of the map of biomes that includes where the player is right now, maybe what is in the biomes, TBD
     }
 
     public static void turnDisplay(Player player, Planet planet){
