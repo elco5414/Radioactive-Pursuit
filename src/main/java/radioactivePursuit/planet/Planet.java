@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 
 
 public class Planet {
-    private List<Biome> biomes;
+    private static List<Biome> biomes;
 
     public static Builder getNewBuilder(BiomeFactory biomeFactory) {
         return new Builder(biomeFactory);
@@ -82,20 +82,9 @@ public class Planet {
         }
 
 
-
-        public Builder createBiomes(List<String> biomeNames) {
-            planet.biomes = new ArrayList<>();
-            for (String biomeName : biomeNames) {
-                Biome currentBiome = biomeFactory.createBiome(biomeName);
-                biomeMap.put(currentBiome.getName(), currentBiome);
-                planet.biomes.add(currentBiome);
-            }
-            return this;
-        }
-
         public Builder createBiomes(int numberOfBiomes) {
             planet.biomes = new ArrayList<>();
-            IntStream.range(0, numberOfBiomes).forEach(_ -> {
+            IntStream.range(2, numberOfBiomes).forEach(_ -> {
                 Biome currentBiome = biomeFactory.createBiome();
                 biomeMap.put(currentBiome.getName(), currentBiome);
                 planet.biomes.add(currentBiome);
@@ -122,25 +111,11 @@ public class Planet {
 
 
         public Builder add(Player player) {
-            nextBiome().add(player);
+            Biome biome = nextBiome();
+            biome.add(player);
+            player.setCurrentLocation(biome);
             return this;
         }
-
-
-        public Builder addCreatures(List<Creature> creatures) {
-            for (Creature creature : creatures) {
-                BiomeType type = creature.getPreferredBiomeType();
-
-                Biome biome = planet.biomes.stream()
-                        .filter(biomeFilter -> biomeFilter.isType(type))
-                        .findAny()
-                        .orElseThrow();
-
-                biome.add(creature);
-            }
-            return this;
-        }
-
 
 
         public Builder addArtifacts(List<Artifact> artifacts) {
@@ -168,21 +143,16 @@ public class Planet {
         }
 
 
-        public Builder addToRoom(String biomeName, Creature creature) {
-            getBiome(biomeName).add(creature);
-            return this;
-        }
-
 
         // not sure if this will affect use, without character class it works a little different.
         // Might have to change how player is added to room
-        public Builder addToRoom(String biomeName, Player player) {
+        public Builder addToBiome(String biomeName, Player player) {
             getBiome(biomeName).add(player);
             return this;
         }
 
 
-        public Builder addToRoom(String biomeName, Artifact artifact) {
+        public Builder addToBiome(String biomeName, Artifact artifact) {
             getBiome(biomeName).add(artifact);
             return this;
         }

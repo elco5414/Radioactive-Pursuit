@@ -1,16 +1,17 @@
 package radioactivePursuit.User;
 
+import radioactivePursuit.creatures.Creature;
+import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.planet.Biome;
+import radioactivePursuit.planet.Planet;
 import radioactivePursuit.player.Player;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Display {
-    Map<String, Boolean> menuOptions = new HashMap<>();
+    static Map<String, Boolean> menuOptions = new HashMap<>();
 
-    private void instantiateMenuOptions(Biome currentBiome, Player currentPlayer) {
+    public static void instantiateMenuOptions(Biome currentBiome, Player currentPlayer) {
         if (currentPlayer.canMove()) {
             menuOptions.put("Move Biomes", false);
         }
@@ -26,9 +27,10 @@ public class Display {
         if (currentPlayer.canCure(currentPlayer.getCurrentLocation().getCreature())) {
             menuOptions.put("Cure Creature", false);
         }
+        menuOptions.put("See Map",false);
     }
 
-    public void displayOptionMenu() {
+    public static void displayOptionMenu() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("What would you like to do next?\n");
@@ -54,7 +56,24 @@ public class Display {
 
     }
 
-    public void turnDisplay(){
+    public static void turnDisplay(Player player, Planet planet){
+        //TO-DO: clean up this function fs
+        //not currently in final printing stage, just to get info out right now
+        player.displayScientist();
+        player.getCurrentLocation().displayBiome();
+
+        //TO-DO: find a way to display the creatures within the biome, where is that
+        // and antidotes and foods as well
+        List<Creature> creaturesInBiome = player.getCurrentLocation().getLivingCreatures();
+        List<Artifact> artifactsInBiome = player.getCurrentLocation().getArtifacts();
+
+        for(Creature creature: creaturesInBiome){
+            creature.displayCreature();
+        }
+        for(Artifact artifact: artifactsInBiome){
+            //TO-DO: clean this, change the function in Biome to just return names maybe in a list..?
+            System.out.println(artifact.getName());
+        }
 
     }
 

@@ -5,11 +5,12 @@ import radioactivePursuit.planet.BiomeType;
 public class Pikachu extends Creature{
 
     Pikachu(String newName, Double newHealth, int newRadioActiveLevel) {
-        super(newName, newHealth, newRadioActiveLevel, BiomeType.TrainStation);
+        super(newName, newHealth, newRadioActiveLevel);
     }
 
     @Override
     public void displayCreature(){
+        System.out.println(super.getName()+ ": "+ super.getRadioActiveLevel() + "☢️ " + super.getHealth() + "❤️ \n");
         if(getRadioActiveLevel() == 0){
             System.out.println(" (\\__/)\n");
             System.out.println(" (o^-^)\n");

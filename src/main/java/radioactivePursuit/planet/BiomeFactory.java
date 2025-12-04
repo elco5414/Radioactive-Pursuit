@@ -34,6 +34,8 @@ public class BiomeFactory {
 
     Random random = new Random();
 
+
+    //TO-DO (mb): why do we need both of these createBiomes?
     Biome createBiome(String name) {
         int randomIndex = random.nextInt(biomeTypes.length);
         BiomeType randomType = biomeTypes[randomIndex];

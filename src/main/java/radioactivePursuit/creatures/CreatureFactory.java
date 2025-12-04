@@ -28,7 +28,7 @@ public class CreatureFactory {
     }
 
     public Creature createButterfree() {
-        return new Butterfree(butterfreeName, 3.0, assignRadioActiveLevel());
+         return new Butterfree(butterfreeName, 3.0, assignRadioActiveLevel());
     }
 
     public List<Creature> createRiverBiomeCreatures(int amountToGenerate) {

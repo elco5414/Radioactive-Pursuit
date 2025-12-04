@@ -2,19 +2,23 @@ package radioactivePursuit;
 
 import java.util.Random;
 import java.util.Scanner;
+
+import radioactivePursuit.User.Display;
 import radioactivePursuit.User.User;
 import radioactivePursuit.creatures.CreatureFactory;
 import radioactivePursuit.interactives.ArtifactFactory;
+import radioactivePursuit.planet.Biome;
 import radioactivePursuit.planet.BiomeFactory;
 import radioactivePursuit.planet.Planet;
 import radioactivePursuit.player.Player;
 
 public class Main {
     static private final Random rand = new Random();
-    static private final int MAX_BIOMES = 5;
+    static private final int MAX_BIOMES = 7;
     static private final int MAX_ = 5;
     private static final CreatureFactory creatureFactory = new CreatureFactory();
     private static final ArtifactFactory artifactFactory = new ArtifactFactory();
+    private static final Display display = new Display();
 
     public static void main(String[] args) {
 
@@ -26,7 +30,8 @@ public class Main {
         openingDisplay(currentPlayer);
         //while loop to actually play the game
         while(gameIsNotOver(currentPlayer, currentPlanet)){
-            playGame();
+            Display.turnDisplay(currentPlayer, currentPlanet);
+            playGame(currentPlayer.getCurrentLocation() ,currentPlayer);
         }
 
         Main.finalDisplay();
@@ -49,25 +54,24 @@ public class Main {
 
     private static Planet worldSetUp(Player currentPlayer){
         BiomeFactory biomeFactory = new BiomeFactory(artifactFactory, creatureFactory);
-        int numberOfBiomes = rand.nextInt(MAX_BIOMES);
 
-        // set up the world
-        // when instantiating player set the name to the user's name
-        // will need to set the players antidote list, some random starting amount
-
-        //change so that biome handles all generation of creatures and artifacts
+        //TO-DO: change so that biome handles all generation of artifacts
         return Planet.getNewBuilder(biomeFactory)
-                .createBiomes(numberOfBiomes)
+                .createBiomes(MAX_BIOMES)
                 .connectCirclePlanet()
                 .add(currentPlayer)
                 .build();
     }
 
     // run the game
-    private static void playGame(){
-        //game play for each turn
-        //whenever the menu for options is displayed, set the player strategy based on that user input!
-        //call display function
+    private static void playGame(Biome currentBiome, Player currentPlayer){
+
+        Display.instantiateMenuOptions(currentBiome,currentPlayer); //set the menu options that are available
+        Display.displayOptionMenu(); //show the player the menu and then collect what they say
+        Scanner sc = new Scanner(System.in);
+        String userChoice = sc.nextLine();
+
+
     }
 
     private static void openingDisplay(Player player){
@@ -87,6 +91,10 @@ public class Main {
                 "\n" +
                 "Step outside your ship, " + player.getName() + ".\n" +
                 "Earth is broken, but hope has landed with you.");
+
+        System.out.println("Would you like to continue? (yes)\n");
+        Scanner sc = new Scanner(System.in);
+        String userInput = sc.nextLine();
     }
 
     private static void finalDisplay() {

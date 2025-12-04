@@ -4,11 +4,13 @@ import radioactivePursuit.planet.BiomeType;
 
 public class Butterfree extends Creature{
     Butterfree(String newName, Double newHealth, int newRadioActiveLevel) {
-        super(newName, newHealth, newRadioActiveLevel, BiomeType.City);
+        super(newName, newHealth, newRadioActiveLevel);
     }
 
     @Override
     public void displayCreature(){
+        //TO-DO: why are the names wrong?
+        System.out.println(super.getName()+ ": "+ super.getRadioActiveLevel() + "☢️ " + super.getHealth() + "❤️ \n");
         if(getRadioActiveLevel() == 0){
             System.out.println("    .==-.                   .-==.");
             System.out.println("   \\()8`-._  `.   .'  _.-'8()/");

@@ -3,17 +3,22 @@ package radioactivePursuit.player;
 import radioactivePursuit.interactives.Antidote;
 import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.interactives.Artifact;
+import radioactivePursuit.interactives.ArtifactFactory;
 import radioactivePursuit.interactives.Food;
 import radioactivePursuit.planet.Biome;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 public class Player {
     private static Double health;
     private static List<Artifact> antidoteList;
     private static PlayStrategy playerStrat;
     private static String name;
+    static private final Random rand = new Random();
+    static private final ArtifactFactory artifactFactory = new ArtifactFactory();
 
     private static final Double DEFAULT_STARTING_HEALTH = 15.0;
 
@@ -22,11 +27,19 @@ public class Player {
     public Player(PlayStrategy playerStrategy) {
         this.health = DEFAULT_STARTING_HEALTH;
         this.playerStrat = playerStrategy;
+        this.antidoteList = startingAntidotes();
     }
 
     public Player(String newName){
         this.name = newName;
         this.health = DEFAULT_STARTING_HEALTH;
+        this.antidoteList = startingAntidotes();
+    }
+
+    private List<Artifact> startingAntidotes() {
+        int amount =  rand.nextInt(4);
+        List<Artifact> antidotes = artifactFactory.createAntidotes(amount);
+        return antidotes;
     }
 
     public String getName() {
@@ -74,11 +87,13 @@ public class Player {
         return currentLocation;
     }
 
-    // jacey changed here
     public void setCurrentLocation(Biome biome) {
-        currentLocation.remove(this);
+        Biome currentBiome = getCurrentLocation();
         currentLocation = biome;
         currentLocation.enterBiome(this);
+        if (currentBiome != null) {
+            currentBiome.remove(this);
+        }
     }
 
     public void fight(Creature creature) {
@@ -135,7 +150,7 @@ public class Player {
         antidoteList.removeLast();
     }
 
-    private void displayScientistArt() {
+    public void displayScientistArt() {
         //fill in with the scientist ASCII character here
         System.out.println(
                 "    (ᵔ‿ᵔ)✨\n" +

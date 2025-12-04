@@ -45,7 +45,7 @@ abstract public class Biome {
 
     public boolean hasRadioActiveCreatures() {
         return getLivingCreatures().stream()
-                .anyMatch(Creature::isCured);
+                .anyMatch(creature -> !creature.isCured());
     }
 
     public List<Creature> getLivingCreatures() {
@@ -54,7 +54,13 @@ abstract public class Biome {
                 .toList();
     }
 
+    public List<Artifact> getArtifacts() {
+        return artifacts.stream()
+                .toList();
+    }
+
     //change to get Player if in room as singleton
+    //TO-DO (possibly): i think we dont need this function?
     public List<String> getContents() {
         List<String> characterStrings = new ArrayList<>(getLivingCreatures().stream()
                 .map(Object::toString)
@@ -89,14 +95,9 @@ abstract public class Biome {
         return neighbors.stream().toList().get(rand.nextInt(neighbors.size()));
     }
 
-    public void add(Creature creature) {
-        creatures.add(creature);
-    }
-
     public void add(List<Creature> creaturesToAdd) {
         creatures.addAll(creaturesToAdd);
     }
-
 
     public void add(Artifact artifact) {
         artifacts.add(artifact);
@@ -107,6 +108,7 @@ abstract public class Biome {
         this.player = player;
     }
 
+    //TO-DO (possibly): think we dont neeed this
     public void remove(Creature creature) {
         creatures.remove(creature);
     }
