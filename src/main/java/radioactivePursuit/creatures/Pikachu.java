@@ -1,0 +1,33 @@
+package radioactivePursuit.creatures;
+
+import radioactivePursuit.planet.BiomeType;
+
+public class Pikachu extends Creature{
+
+    Pikachu(String newName, Double newHealth, int newRadioActiveLevel) {
+        super(newName, newHealth, newRadioActiveLevel);
+    }
+
+    @Override
+    public void displayCreature(){
+        System.out.println(super.getName()+ ": "+ super.getRadioActiveLevel() + "☢️ " + super.getHealth() + "❤️ \n");
+        if(getRadioActiveLevel() == 0){
+            System.out.println(" (\\__/)\n");
+            System.out.println(" (o^-^)\n");
+            System.out.println(" z(\")(\")\n");
+        }else if(getRadioActiveLevel() == 1){
+            System.out.println(" (\\__/)\n");
+            System.out.println(" (>‘o‘<)\n");
+            System.out.println(" z(\")(\")\n");
+        }else if(getRadioActiveLevel() == 2){
+            System.out.println(" (\\__/)\n");
+            System.out.println(" (^•ᴥ•^)\n");
+            System.out.println(" z(\")(\")🔥\n");
+        }else{
+            System.out.println("   (\\__/)");
+            System.out.println("   (O>_<O)");
+            System.out.println(" 🔥/︵|︵\\🔥");
+            System.out.println("  z(\")(\")");
+        }
+    }
+}

@@ -1,4 +1,5 @@
 package radioactivePursuit.player;
 
-abstract public class PlayStrategy {
+public interface PlayStrategy {
+    abstract void doAction(Player scientist);
 }

@@ -1,4 +1,10 @@
 package radioactivePursuit.player;
 
-public class CollectingAntidoteStrategy extends PlayStrategy {
+public class CollectingAntidoteStrategy implements PlayStrategy {
+    @Override
+    public void doAction(Player scientist) {
+        if(scientist.canCollectAntidote()){
+            scientist.collectAntidote();
+        }
+    }
 }

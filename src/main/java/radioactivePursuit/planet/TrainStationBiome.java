@@ -1,4 +1,30 @@
 package radioactivePursuit.planet;
 
-public class TrainStationBiome extends Biome{
+public class TrainStationBiome extends Biome {
+
+    protected TrainStationBiome(String name) {
+        super(name, BiomeType.TrainStation);
+    }
+
+    @Override
+    public void displayBiome() {
+        System.out.println("~~~~~" + super.getName()+ "~~~~~\n");
+        System.out.println(
+                "               .---._\n" +
+                        "           .--(. '  .).--.      . .-.\n" +
+                        "        . ( ' _) .)` (   .)-. ( ) '-'\n" +
+                        "       ( ,  ).        `(' . _)\n" +
+                        "     (')  _________      '-'\n" +
+                        "     ____[_________]                                         ________\n" +
+                        "     \\__/ | _ \\  ||    ,;,;,,                               [________]\n" +
+                        "     _][__|(\")/__||  ,;;;;;;;;,   __________   __________   _| LILI |_\n" +
+                        "    /             | |____      | |          | |  ___     | |      ____|\n" +
+                        "   (| .--.    .--.| |     ___  | |   |  |   | |      ____| |____      |\n" +
+                        "   /|/ .. \\~~/ .. \\_|_.-.__.-._|_|_.-:__:-._|_|_.-.__.-._|_|_.-.__.-._|\n" +
+                        "+=/_|\\ '' /~~\\ '' /=+( o )( o )+==( o )( o )=+=( o )( o )+==( o )( o )=+=\n" +
+                        "='=='='--'==+='--'===+'-'=='-'==+=='-'+='-'===+='-'=='-'==+=='-'=+'-'jgs+"
+        );
+
+    }
+
 }
