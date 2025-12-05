@@ -34,6 +34,9 @@ abstract public class Biome {
         return name;
     }
 
+    public List<Creature> getCreatures() {
+        return creatures;
+    }
 
     public boolean hasLivingCreatures() {
         return !getLivingCreatures().isEmpty();

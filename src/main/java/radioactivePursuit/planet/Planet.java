@@ -24,6 +24,14 @@ public class Planet {
         return String.join("\n\n", biomes.stream().map(Object::toString).toList());
     }
 
+    public List<Creature> getCreatures() {
+        List<Creature> creatures = new ArrayList<>();
+        for(Biome biome: biomes){
+            creatures.addAll(biome.getCreatures());
+        }
+        return creatures;
+    }
+
     public Boolean hasLivingCreatures() {
 
         return biomes.stream().anyMatch(Biome::hasLivingCreatures);

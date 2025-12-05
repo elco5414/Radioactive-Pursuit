@@ -1,49 +1,57 @@
 package radioactivePursuit;
 
-import java.util.Scanner;
-
 import radioactivePursuit.User.Display;
+import radioactivePursuit.User.Leaderboard;
 import radioactivePursuit.User.User;
+import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.creatures.CreatureFactory;
 import radioactivePursuit.interactives.ArtifactFactory;
 import radioactivePursuit.planet.BiomeFactory;
 import radioactivePursuit.planet.Planet;
-import radioactivePursuit.player.PlayStrategy;
-import radioactivePursuit.player.Player;
+import radioactivePursuit.player.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Game {
     //TODO instance of game
-    static private final int MAX_BIOMES = 7;
-    private static final CreatureFactory creatureFactory = new CreatureFactory();
-    private static final ArtifactFactory artifactFactory = new ArtifactFactory();
-    private static final Display display = new Display();
+    private final int MAX_BIOMES = 7;
+    private final CreatureFactory creatureFactory = new CreatureFactory();
+    private final ArtifactFactory artifactFactory = new ArtifactFactory();
+    private final Display display = new Display();
+    private Boolean playerDied = false;
+    private Boolean creaturesResolved = false;
 
-    public static void main(String[] args) {
+    User currentUser;
+    Player currentPlayer;
+    Planet currentPlanet;
+    Leaderboard leaderboard = Leaderboard.getInstance();
+    Map<String, Boolean> menuOptions = new HashMap<>();
 
-        // TODO make instance variables
-        User currentUser = userSetUp();
-        Player currentPlayer = new Player(currentUser.getName());
-        Planet currentPlanet = worldSetUp(currentPlayer);
+    public void main(String[] args) {
 
-        printIntro(currentPlayer);
+        //TODO dependency injection?
+        currentUser = getUserName();
+        currentPlayer = new Player(currentUser.getName());
+        currentPlanet = worldSetUp();
 
-        playGame(currentPlayer, currentPlanet);
-
-        finalDisplay();
+        printIntro();
+        playGame();
+        printOutro();
     }
 
-    public static void playGame(Player currentPlayer, Planet currentPlanet) {
-        while(gameIsNotOver(currentPlayer, currentPlanet)){
-            display.turnDisplay(currentPlayer, currentPlanet);
-            playTurn(currentPlayer);
+    public void playGame() {
+        while (gameIsNotOver()) {
+            display.turnDisplay(this.currentPlayer);
+            playTurn();
         }
     }
 
-    //method to instantiate user and grab their info
-    private static User userSetUp(){
+    private User getUserName() {
         User currentUser = new User();
 
-        //ask the user their name and store that in current user
         System.out.println("Welcome to RadioActive Pursuit\n");
         System.out.println("Please enter your user name in the command line!\n");
         Scanner sc = new Scanner(System.in);
@@ -54,35 +62,85 @@ public class Game {
         return currentUser;
     }
 
-    static Planet worldSetUp(Player currentPlayer){
-        BiomeFactory biomeFactory = new BiomeFactory(artifactFactory, creatureFactory);
+    Planet worldSetUp() {
+        BiomeFactory biomeFactory = new BiomeFactory(this.artifactFactory, this.creatureFactory);
 
         return Planet.getNewBuilder(biomeFactory)
                 .createBiomes(MAX_BIOMES)
                 .connectCirclePlanet()
-                .add(currentPlayer)
+                .add(this.currentPlayer)
                 .build();
     }
 
 
-    static void getUserChoice(Player currentPlayer){
-        display.instantiateMenuOptions(currentPlayer);
-        display.displayOptionMenuAndSetUserChoice();
+    void showPlayerOptions() {
+        this.menuOptions = display.instantiateMenuOptions(this.currentPlayer, this.menuOptions);
+        this.display.displayMenuOptions(this.menuOptions);
     }
 
-    static void playTurn(Player currentPlayer){
-        PlayStrategy newStrategy = display.getPlayerStrategy(currentPlayer);
-        currentPlayer.setPlayStrategy(newStrategy);
-        currentPlayer.doAction();
+
+    void playTurn() {
+        showPlayerOptions();
+        setUserChoice();
+        PlayStrategy newStrategy = getPlayerStrategy();
+        this.currentPlayer.setPlayStrategy(newStrategy);
+        this.currentPlayer.doAction();
     }
 
-    private static void printIntro(Player player){
-        //fill in the background story here...
+    public PlayStrategy getPlayerStrategy() {
+        // TODO refactor everything
+        for (Map.Entry<String, Boolean> entry : menuOptions.entrySet()) {
+            if (entry.getValue() == true) {
+                String chosenOption = entry.getKey();
+                if ("Move Biomes".equals(chosenOption)) {
+                    return new MoverStrategy();
+
+                } else if ("Eat Food".equals(chosenOption)) {
+                    return new MuncherStrategy();
+
+                } else if ("Fight Creature".equals(chosenOption)) {
+                    return new FighterStrategy();
+
+                } else if ("Collect Antidote".equals(chosenOption)) {
+                    return new CollectingAntidoteStrategy();
+
+                } else if ("Cure Creature".equals(chosenOption)) {
+                    return new CurerStrategy();
+
+                } else if ("See Map".equals(chosenOption)) {
+                    display.displayMap(this.currentPlanet);
+                    return new InactionStrategy();
+                }
+                break;
+            }
+        }
+        return new InactionStrategy();
+    }
+
+    public void setUserChoice() {
+        Scanner sc = new Scanner(System.in);
+        String userChoice;
+
+        while (true) {
+            System.out.print("\nEnter your choice: ");
+            userChoice = sc.nextLine().trim();
+
+            if (menuOptions.containsKey(userChoice)) {
+                menuOptions.put(userChoice, true);
+                System.out.println("\nYou selected: " + userChoice);
+                break;
+            } else {
+                System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    private void printIntro() {
         System.out.println("Many decades ago, Earth fell silent. A chain of nuclear failures poisoned the land, twisted the wildlife, and forced humanity to flee. A handful of scientists escaped into orbit, watching their home decay from above while they struggled to survive.\n" +
                 "\n" +
                 "Generations passed, and now only fragmented transmissions reach the stations: life still clings to the surface, but it has changed. Animals once familiar have become dangerous, aggressive, and radioactive. If nothing is done, Earth will be lost forever.\n" +
                 "\n" +
-                "You, " + player.getName()+ ", are the first scientist brave — or desperate — enough to return.\n" +
+                "You, " + this.currentPlayer.getName() + ", are the first scientist brave — or desperate — enough to return.\n" +
                 "\n" +
                 "Armed with research, limited equipment, and a supply of experimental antidotes, you descend toward the ruined planet. Your mission is simple but merciless:\n" +
                 "\n" +
@@ -91,22 +149,57 @@ public class Game {
                 "\n" +
                 "The antidotes you carry are few, and although rare supplies may still exist scattered across Earth, they will not be enough to save everything. Hard choices await. Some creatures can be restored… others must be destroyed before their mutations spread beyond control.\n" +
                 "\n" +
-                "Step outside your ship, " + player.getName() + ".\n" +
+                "Step outside your ship, " + this.currentPlayer.getName() + ".\n" +
                 "Earth is broken, but hope has landed with you.");
 
-        System.out.println("Would you like to continue? (yes)\n");
     }
 
-    private static void finalDisplay() {
+    private void printOutro() {
 
+        this.currentUser.setScore(calculateScore());
+        if (playerDied) {
+            System.out.println("You Died. Humanity is no longer...\n");
+        }
+        if (creaturesResolved) {
+            System.out.println("You saved Earth from apocalyptic overturn! CONGRATULATIONS!\n");
+            System.out.println("Your score will be higher if you opted to cure more than kill.\n");
+        }
+        System.out.println("Your score is: " + this.currentUser.getScore() + "\n");
+        leaderboard.addUserToLeaderboard(currentUser);
+        leaderboard.displayLeaderBoard();
     }
 
-    static boolean gameIsNotOver(Player scientist, Planet currentPlanet) {
-        if(!scientist.isAlive()){  //check that the player is alive
+    private int calculateScore() {
+        int score = 0;
+        if (playerDied) {
+            return score;
+        }
+        if (creaturesResolved) {
+            int curedCreatureCount = 0;
+            int killedCreatureCount = 0;
+
+            List<Creature> creatures = this.currentPlanet.getCreatures();
+
+            for (Creature creature : creatures) {
+                if (!creature.isAlive()) {
+                    killedCreatureCount++;
+                } else if (creature.isCured()) {
+                    curedCreatureCount = curedCreatureCount + 3;
+                }
+            }
+            score = killedCreatureCount + curedCreatureCount;
+        }
+        return score;
+    }
+
+    boolean gameIsNotOver() {
+        if (!this.currentPlayer.isAlive()) {
+            playerDied = true;
             return false;
-        }else if(!currentPlanet.hasRadioActiveCreatures()){ //check that there are no living uncured creatures
+        } else if (!this.currentPlanet.hasRadioActiveCreatures()) {
+            creaturesResolved = true;
             return false;
-        }else{
+        } else {
             return true;
         }
     }
