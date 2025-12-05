@@ -3,7 +3,7 @@ package radioactivePursuit.creatures;
 abstract public class Creature {
     private Double health;
     private int radioActiveLevel;
-    private String name;
+    private final String name;
 
     Creature(String newName, Double newHealth, int newRadioActiveLevel) {
         this.name = newName;
@@ -13,10 +13,6 @@ abstract public class Creature {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String newName) {
-        name = newName;
     }
 
     public boolean isCured() {

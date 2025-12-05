@@ -26,15 +26,10 @@ public class Planet {
 
     public List<Creature> getCreatures() {
         List<Creature> creatures = new ArrayList<>();
-        for(Biome biome: biomes){
+        for (Biome biome : biomes) {
             creatures.addAll(biome.getCreatures());
         }
         return creatures;
-    }
-
-    public Boolean hasLivingCreatures() {
-
-        return biomes.stream().anyMatch(Biome::hasLivingCreatures);
     }
 
     public Boolean hasRadioActiveCreatures() {
@@ -89,7 +84,7 @@ public class Planet {
 
             for (int i = 0; i < planet.biomes.size() - 1; i++) {
                 Biome currentBiome = planet.biomes.get(i);
-                Biome neighbor = planet.biomes.get(i+1);
+                Biome neighbor = planet.biomes.get(i + 1);
 
                 currentBiome.addNeighbor(neighbor);
             }
@@ -111,13 +106,11 @@ public class Planet {
             assert planet.size() > 0;
             for (Biome biome : planet.biomes) {
                 if (biome.numberOfNeighbors() == 0) {
-                    //logger.warn("Biome {} has no neighbors. Connecting it to another biome.", biome.getName());
                     biome.addNeighbor(nextBiome());
                 }
             }
 
             if (!planet.hasLivingPlayer()) {
-                //logger.error("No Player created. Terminating game.");
                 throw new IllegalStateException("No Player created. Terminating game.");
             }
             return planet;

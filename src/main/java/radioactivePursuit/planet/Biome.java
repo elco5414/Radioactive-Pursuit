@@ -38,11 +38,6 @@ abstract public class Biome {
         return creatures;
     }
 
-    public boolean hasLivingCreatures() {
-        return !getLivingCreatures().isEmpty();
-    }
-
-
     public boolean hasRadioActiveCreatures() {
         return getLivingCreatures().stream()
                 .anyMatch(creature -> !creature.isCured());
