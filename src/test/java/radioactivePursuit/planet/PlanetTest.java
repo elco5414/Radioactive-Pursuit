@@ -21,12 +21,12 @@ public class PlanetTest {
         Player player = new Player("TestPlayer");
 
         Planet planet = Planet.getNewBuilder(biomeFactory)
-                .createBiomes(10)
+                .createBiomes(3)
                 .connectCirclePlanet()
                 .add(player)
                 .build();
 
-        assertEquals(10, planet.size());
+        assertEquals(3, planet.size());
 
     }
 

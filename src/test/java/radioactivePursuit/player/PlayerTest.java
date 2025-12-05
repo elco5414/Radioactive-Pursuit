@@ -5,8 +5,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
     @Test
-    void PlayerTestInitialization(){
-        //will use builder strategy
+    void testInitialization(){
     }
 
+    @Test
+    void testUseAntidote(){
+
+    }
+
+    @Test
+    void testSetPlayerStrategy(){
+
+    }
+
+    @Test
+    void testFight(){
+
+    }
 }
