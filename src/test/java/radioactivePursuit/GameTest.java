@@ -1,5 +1,6 @@
 package radioactivePursuit;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import radioactivePursuit.User.User;
 import radioactivePursuit.creatures.CreatureFactory;
@@ -15,17 +16,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
 
-    private final InputStream originalSystemIn = System.in;
+    Game game;
 
-    @Test
-    void testFightTurn() {
+    @BeforeEach
+    void setUp() {
+        game = new Game();
+        game.currentUser = new User();
+        game.currentPlayer = new Player(game.currentUser.getName());
+        game.currentPlanet = game.worldSetUp();
 
     }
 
+
     @Test
     void testCureTurn() {
-        Game game = new Game();
-
         game.menuOptions.put("Move Biomes", false);
         game.menuOptions.put("Eat Food", false);
         game.menuOptions.put("Fight Creature", false);
@@ -35,14 +39,12 @@ class GameTest {
 
         PlayStrategy strategy = game.getPlayerStrategy();
 
-        assertTrue(strategy instanceof CurerStrategy);
+        assertInstanceOf(CurerStrategy.class, strategy);
 
     }
 
     @Test
     void testMunchTurn() {
-        Game game = new Game();
-
         game.menuOptions.put("Move Biomes", false);
         game.menuOptions.put("Eat Food", true);
         game.menuOptions.put("Fight Creature", false);
@@ -52,14 +54,12 @@ class GameTest {
 
         PlayStrategy strategy = game.getPlayerStrategy();
 
-        assertTrue(strategy instanceof MuncherStrategy);
+        assertInstanceOf(MuncherStrategy.class, strategy);
 
     }
 
     @Test
     void testInactionTurn() {
-        Game game = new Game();
-
         game.menuOptions.put("Move Biomes",false);
         game.menuOptions.put("Eat Food", false);
         game.menuOptions.put("Fight Creature", false);
@@ -69,17 +69,11 @@ class GameTest {
 
         PlayStrategy strategy = game.getPlayerStrategy();
 
-        assertTrue(strategy instanceof InactionStrategy);
+        assertInstanceOf(InactionStrategy.class, strategy);
     }
 
     @Test
     void testMoverTurn() {
-        Game game = new Game();
-        Player player = new Player("TestMovePlayer");
-        game.currentPlayer = player;
-        game.currentPlanet = game.worldSetUp();
-        Biome playersFirstRoom = player.getCurrentLocation();
-
         game.menuOptions.put("Move Biomes",true);
         game.menuOptions.put("Eat Food", false);
         game.menuOptions.put("Fight Creature", false);
@@ -88,8 +82,8 @@ class GameTest {
         game.menuOptions.put("See Map",false);
 
         PlayStrategy strategy = game.getPlayerStrategy();
-        game.playTurn();
-        assertTrue(player.getCurrentLocation() != playersFirstRoom);
+
+        assertInstanceOf(MoverStrategy.class, strategy);
     }
 
     @Test
@@ -105,7 +99,7 @@ class GameTest {
 
         PlayStrategy strategy = game.getPlayerStrategy();
 
-        assertTrue(strategy instanceof CollectingAntidoteStrategy);
+        assertInstanceOf(CollectingAntidoteStrategy.class, strategy);
 
     }
 
@@ -128,20 +122,6 @@ class GameTest {
 
     @Test
     void testGameEndsThroughCreatureCured() {
-        Game game = new Game();
-        ArtifactFactory artifactFactory = new ArtifactFactory();
-        CreatureFactory creatureFactory = new CreatureFactory();
-        BiomeFactory biomeFactory = new BiomeFactory(artifactFactory, creatureFactory);
-
-        Player player = new Player("TestGameOver");
-        player.setHealth(0.0);
-        game.currentPlayer = player;
-        game.currentPlanet =
-                Planet.getNewBuilder(biomeFactory)
-                .createBiomes(3)
-                .connectCirclePlanet()
-                .add(game.currentPlayer)
-                .build();
 
         game.menuOptions.put("Move Biomes", false);
         game.menuOptions.put("Eat Food", false);
@@ -163,20 +143,6 @@ class GameTest {
 
     @Test
     void testGameEndsThroughCreatureDeath() {
-        Game game = new Game();
-        ArtifactFactory artifactFactory = new ArtifactFactory();
-        CreatureFactory creatureFactory = new CreatureFactory();
-        BiomeFactory biomeFactory = new BiomeFactory(artifactFactory, creatureFactory);
-
-        Player player = new Player("TestGameOver");
-        player.setHealth(0.0);
-        game.currentPlayer = player;
-        game.currentPlanet =
-                Planet.getNewBuilder(biomeFactory)
-                        .createBiomes(3)
-                        .connectCirclePlanet()
-                        .add(player)
-                        .build();
 
         game.menuOptions.put("Move Biomes", false);
         game.menuOptions.put("Eat Food", false);
@@ -194,6 +160,11 @@ class GameTest {
 
         int score = game.calculateScore();
         assertEquals(score, 1);
+
+    }
+
+    @Test
+    void testFightTurn() {
 
     }
 

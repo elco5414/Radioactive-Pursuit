@@ -1,8 +1,6 @@
 package radioactivePursuit.player;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import radioactivePursuit.creatures.CreatureFactory;
@@ -13,6 +11,8 @@ import radioactivePursuit.planet.BiomeFactory;
 import radioactivePursuit.planet.Planet;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MoverTest {
     private final ArtifactFactory artifactFactory = new ArtifactFactory();
@@ -34,6 +34,6 @@ public class MoverTest {
         Biome startingBiome = player.getCurrentLocation();
         player.doAction();
 
-        assertTrue(startingBiome != player.getCurrentLocation());
+        assertNotSame(startingBiome, player.getCurrentLocation());
     }
 }

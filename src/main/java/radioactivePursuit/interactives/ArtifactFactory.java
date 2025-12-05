@@ -11,7 +11,7 @@ public class ArtifactFactory {
     private static final double MINIMUM_VALUE = 1.0;
     private static final double MAXIMUM_VALUE = 2.0;
 
-    //TODO: change the food names into emojis, and then we can just print the name for the display???
+    //TODO: change the food names into emojis, and then we can just print the name for the display
     private static final String[] FOOD_NAMES = new String[]{
             "cupcake", "apple", "banana", "steak", "salad", "fries", "burger", "pizza", "eggs",
             "bacon", "muffin", "donut", "chicken", "pasta", "rice", "sushi", "taco", "burrito",
@@ -33,10 +33,6 @@ public class ArtifactFactory {
     private static String getRandomName(ArtifactType type) {
         String[] names = NAMES.get(type);
         return names[random.nextInt(names.length)];
-    }
-
-    public List<Artifact> createFoodItems(int numberOfItems) {
-        return createArtifacts(ArtifactType.Food, numberOfItems);
     }
 
     public List<Artifact> createAntidotes(int numberOfItems) {
