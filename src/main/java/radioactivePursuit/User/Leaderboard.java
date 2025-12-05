@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Leaderboard {
+    private static final Leaderboard instance = new Leaderboard();
 
-    private static final Leaderboard LeaderboardInstance = new Leaderboard();
     List<User> userList = new ArrayList<>();
 
-    public static Leaderboard getInstance(){
-        return LeaderboardInstance;
+    private Leaderboard() {
     }
 
-    public void addUserToLeaderboard(User user){
+    public static Leaderboard getInstance() {
+        return instance;
+    }
+
+    //could be not thread safe if BDD testing is implemented
+    public void addUserToLeaderboard(User user) {
         userList.add(user);
     }
 
+
     public List<User> calculateLeaderBoard() {
-        if (userList.size() <= 3) {
-            return userList.stream()
-                    .sorted((a, b) -> Integer.compare(b.getScore(), a.getScore()))
-                    .toList();
-        }
         return userList.stream()
                 .sorted((a, b) -> Integer.compare(b.getScore(), a.getScore()))
                 .limit(3)
@@ -32,8 +32,14 @@ public class Leaderboard {
         System.out.println("***LEADERBOARD***\n");
         System.out.println("*** NAME --- SCORE ***\n");
         List<User> topThreeUsers = calculateLeaderBoard();
-        System.out.println("*** " + topThreeUsers.get(0).getName() + " --- " + topThreeUsers.get(0).getScore() + " ***\n");
-        System.out.println("*** " + topThreeUsers.get(1).getName() + " --- " + topThreeUsers.get(1).getScore() + " ***\n");
-        System.out.println("*** " + topThreeUsers.get(2).getName() + " ---  " + topThreeUsers.get(2).getScore() + "  ***\n");
+        if (topThreeUsers.size() < 3) {
+            for (User user : topThreeUsers) {
+                System.out.println("*** " + user.getName() + " --- " + user.getScore() + " ***");
+            }
+        } else {
+            System.out.println("*** " + topThreeUsers.get(0).getName() + " --- " + topThreeUsers.get(0).getScore() + " ***\n");
+            System.out.println("*** " + topThreeUsers.get(1).getName() + " --- " + topThreeUsers.get(1).getScore() + " ***\n");
+            System.out.println("*** " + topThreeUsers.get(2).getName() + " ---  " + topThreeUsers.get(2).getScore() + "  ***\n");
+        }
     }
 }

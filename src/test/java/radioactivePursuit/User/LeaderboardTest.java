@@ -33,7 +33,28 @@ public class LeaderboardTest {
     }
     @Test
     void testCalculateLeaderBoard(){
+        // Arrange
+        User userA = new User();
+        User userB = new User();
+        User userC = new User();
+
+
+        // Act
+        userA.setName("TestA");
+        userA.setScore(90);
+
+        userB.setName("TestB");
+        userB.setScore(80);
+
+        userC.setName("TestC");
+        userC.setScore(60);
+
+        leaderboardInstance.addUserToLeaderboard(userA);
+        leaderboardInstance.addUserToLeaderboard(userB);
+        leaderboardInstance.addUserToLeaderboard(userC);
         List<User> topThreeUsers = leaderboardInstance.calculateLeaderBoard();
+
+        // Assert
         assertTrue(topThreeUsers.get(0).getScore() > topThreeUsers.get(1).getScore());
         assertTrue(topThreeUsers.get(1).getScore() > topThreeUsers.get(2).getScore());
     }
