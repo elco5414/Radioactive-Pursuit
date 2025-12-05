@@ -43,22 +43,58 @@ public class Display {
     }
 
     public void printIntro(Player currentPlayer) {
-        System.out.println("Many decades ago, Earth fell silent. A chain of nuclear failures poisoned the land, twisted the wildlife, and forced humanity to flee. A handful of scientists escaped into orbit, watching their home decay from above while they struggled to survive.\n" +
-                "\n" +
-                "Generations passed, and now only fragmented transmissions reach the stations: life still clings to the surface, but it has changed. Animals once familiar have become dangerous, aggressive, and radioactive. If nothing is done, Earth will be lost forever.\n" +
-                "\n" +
-                "You, " + currentPlayer.getName() + ", are the first scientist brave — or desperate — enough to return.\n" +
-                "\n" +
-                "Armed with research, limited equipment, and a supply of experimental antidotes, you descend toward the ruined planet. Your mission is simple but merciless:\n" +
-                "\n" +
-                "• Cure what you can.\n" +
-                "• Eliminate what you cannot.\n" +
-                "\n" +
-                "The antidotes you carry are few, and although rare supplies may still exist scattered across Earth, they will not be enough to save everything. Hard choices await. Some creatures can be restored… others must be destroyed before their mutations spread beyond control.\n" +
-                "\n" +
-                "Step outside your ship, " + currentPlayer.getName() + ".\n" +
-                "Earth is broken, but hope has landed with you.");
+        String border = "═".repeat(80);
+        String thinBorder = "─".repeat(80);
 
+        System.out.println("\n" + border);
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                        E A R T H :   R E C L A M A T I O N                   ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════╝");
+        System.out.println(border + "\n");
+
+        printWithDelay("  Many decades ago, Earth fell silent. A chain of nuclear failures poisoned");
+        printWithDelay("  the land, twisted the wildlife, and forced humanity to flee. A handful of");
+        printWithDelay("  scientists escaped into orbit, watching their home decay from above while");
+        printWithDelay("  they struggled to survive.\n");
+
+        printWithDelay("  Generations passed, and now only fragmented transmissions reach the stations:");
+        printWithDelay("  life still clings to the surface, but it has changed. Animals once familiar");
+        printWithDelay("  have become dangerous, aggressive, and radioactive. If nothing is done,");
+        printWithDelay("  Earth will be lost forever.\n");
+
+        System.out.println(thinBorder);
+        System.out.println("\n  >> MISSION BRIEFING: SCIENTIST " + currentPlayer.getName().toUpperCase() + " <<\n");
+        System.out.println(thinBorder + "\n");
+
+        printWithDelay("  You, " + currentPlayer.getName() + ", are the first scientist brave — or desperate —");
+        printWithDelay("  enough to return.\n");
+
+        printWithDelay("  Armed with research, limited equipment, and a supply of experimental antidotes,");
+        printWithDelay("  you descend toward the ruined planet. Your mission is simple but merciless:\n");
+
+        System.out.println("  ┌─────────────────────────────────────────────────────────────────────────┐");
+        System.out.println("  │  ✓  Cure what you can.                                                  │");
+        System.out.println("  │  ✗  Eliminate what you cannot.                                          │");
+        System.out.println("  └─────────────────────────────────────────────────────────────────────────┘\n");
+
+        printWithDelay("  The antidotes you carry are few, and although rare supplies may still exist");
+        printWithDelay("  scattered across Earth, they will not be enough to save everything. Hard");
+        printWithDelay("  choices await. Some creatures can be restored… others must be destroyed");
+        printWithDelay("  before their mutations spread beyond control.\n");
+
+        System.out.println(thinBorder);
+        System.out.println("\n  >> Step outside your ship, " + currentPlayer.getName() + ".");
+        System.out.println("  >> Earth is broken, but hope has landed with you.\n");
+        System.out.println(border + "\n");
+    }
+
+    private void printWithDelay(String text) {
+        System.out.println(text);
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public void displayMenuOptions(Map<String, Boolean> menuOptions){
@@ -150,7 +186,8 @@ public class Display {
             System.out.println("║                                                                                          ║");
 
             System.out.print("║  👩‍🔬 " + player.getName() + ": " + player.getAntidoteCount() + "🧪, " + player.getHealth() + "❤️");
-            System.out.print("  |  🌍 " + currentBiome.getName());
+            System.out.print("  |  ");
+            currentBiome.displayBiome();
             System.out.println("                                    ║");
 
             System.out.println("║  ════════════════════════════════════════════════════════════════════════════════════  ║");
@@ -176,7 +213,7 @@ public class Display {
             }
             System.out.println("║                                                                                          ║");
             System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝\n");
-        }
+    }
 
     public void showBadEnding() {
         System.out.println("You Died. Humanity is no longer...\n");
