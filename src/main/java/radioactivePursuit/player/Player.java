@@ -124,7 +124,7 @@ public class Player {
     public void move() {
         assert getCurrentLocation().hasNeighbors();
         Biome newBiome = currentLocation.getRandomNeighbor();
-        newBiome.enterBiome(this);
+        newBiome.add(this);
         setCurrentLocation(newBiome);
     }
 
