@@ -12,6 +12,7 @@ Explore different biomes and cure or kill creatures until you have beat the game
 
 # Submission Materials
 **Team members:** Jacey Fischer && Elizabeth Coleman
+
 **Design Patterns:** Below is a diagram (not formal UML) that represents our code structure and highlights specific design patterns with red circles. 
 
 We used 5 patterns: 
