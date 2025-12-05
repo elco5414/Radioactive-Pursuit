@@ -154,7 +154,9 @@ public class Player {
             Artifact lastAntidote = this.antidoteList.getLast();
             this.antidoteList.remove(lastAntidote);
         }
-        System.out.println("No antidotes to use.");
+        else{
+            System.out.println("No antidotes to use.");
+        }
     }
 
     public void displayScientistArt() {
