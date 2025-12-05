@@ -30,16 +30,18 @@ public class Game {
     Leaderboard leaderboard = Leaderboard.getInstance();
     Map<String, Boolean> menuOptions = new HashMap<>();
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
+
+        Game game = new Game();
 
         //TODO dependency injection?
-        currentUser = getUserName();
-        currentPlayer = new Player(currentUser.getName());
-        currentPlanet = worldSetUp();
+        game.currentUser = game.getUserName();
+        game.currentPlayer = new Player(game.currentUser.getName());
+        game.currentPlanet = game.worldSetUp();
 
-        printIntro();
-        playGame();
-        printOutro();
+        game.printIntro();
+        game.playGame();
+        game.printOutro();
     }
 
     public void playGame() {

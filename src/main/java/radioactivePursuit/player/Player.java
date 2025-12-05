@@ -13,10 +13,10 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Player {
-    private static Double health;
+    private Double health;
     private List<Artifact> antidoteList = new ArrayList<>();
-    private static PlayStrategy playerStrat;
-    private static String name;
+    private PlayStrategy playerStrat;
+    private String name;
     static private final Random rand = new Random();
     static private final ArtifactFactory artifactFactory = new ArtifactFactory();
 
@@ -99,15 +99,12 @@ public class Player {
     public void fight(Creature creature) {
         double creatureHealth = creature.getHealth();
         if (creatureHealth == health) {
-            System.out.println("Equal health");
             creature.setHealth(creatureHealth - 1);
             setHealth(health - 1);
         } else if (creatureHealth >= health) {
-            System.out.println("creature grreater");
             double differenceInHealth = creatureHealth - health;
             setHealth(health - differenceInHealth);
         } else {
-            System.out.println("you greater");
             double differenceInHealth = health - creatureHealth;
             creature.setHealth(creatureHealth - differenceInHealth);
         }
@@ -149,14 +146,15 @@ public class Player {
         antidoteList.add(antidote);
     }
 
-    public void useAntidote() {
-        Artifact lastAntidote = antidoteList.getLast();
-        //TODO: fix this
-        antidoteList.remove(lastAntidote);
+    public void useAntidote() {  //TODO: fix this
+        if(getAntidoteCount() != 0){
+            Artifact lastAntidote = this.antidoteList.getLast();
+            this.antidoteList.remove(lastAntidote);
+        }
+        System.out.println("No antidotes to use.");
     }
 
     public void displayScientistArt() {
-        //fill in with the scientist ASCII character here
         System.out.println(
                 "    (ᵔ‿ᵔ)✨\n" +
                 "    /|️🔬|\\\n" +
