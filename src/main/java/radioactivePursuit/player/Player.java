@@ -18,10 +18,13 @@ public class Player {
     private String name;
     static private final Random rand = new Random();
     static private final ArtifactFactory artifactFactory = new ArtifactFactory();
+    private Biome currentLocation;
+    private Biome previousLocation;
+    private Biome secondPreviousLocation;
+    //TODO is this too wonky? just use random neighbor?
 
     private static final Double DEFAULT_STARTING_HEALTH = 15.0;
 
-    private Biome currentLocation;
 
     public Player(PlayStrategy playerStrategy) {
         this.health = DEFAULT_STARTING_HEALTH;
@@ -99,6 +102,7 @@ public class Player {
         }
     }
 
+    // TODO Print Something if creature dies or you die
     public void fight(Creature creature) {
         double creatureHealth = creature.getHealth();
         if (creatureHealth == health) {
@@ -123,7 +127,9 @@ public class Player {
 
     public void move() {
         assert getCurrentLocation().hasNeighbors();
-        Biome newBiome = currentLocation.getRandomNeighbor();
+        secondPreviousLocation = previousLocation;
+        previousLocation = currentLocation;
+        Biome newBiome = currentLocation.getNextNeighbor(previousLocation, secondPreviousLocation);
         newBiome.add(this);
         setCurrentLocation(newBiome);
     }

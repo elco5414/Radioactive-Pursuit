@@ -72,6 +72,13 @@ abstract public class Biome {
         return neighbors.stream().toList().get(rand.nextInt(neighbors.size()));
     }
 
+    public Biome getNextNeighbor(Biome previousLocation, Biome secondPreviousLocation) {
+        if (neighbors.isEmpty()) {
+            return null;
+        }
+        return neighbors.stream().filter(neighbor -> neighbor != previousLocation && neighbor != secondPreviousLocation).toList().getFirst();
+    }
+
     public void add(List<Creature> creaturesToAdd) {
         creatures.addAll(creaturesToAdd);
     }
