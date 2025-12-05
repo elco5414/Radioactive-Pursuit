@@ -12,11 +12,11 @@ public class PlayerTest {
         Player player = new Player(playStrategy);
         Player playerWithName = new Player("TestPlayer");
 
-        assertEquals(player.getHealth(), 15.0);
+        assertEquals(player.getHealth(), 10.0);
         assertTrue(player.getAntidoteCount() > 0);
 
         assertEquals(playerWithName.getName(), "TestPlayer");
-        assertEquals(playerWithName.getHealth(), 15.0);
+        assertEquals(playerWithName.getHealth(), 10.0);
         assertTrue(playerWithName.getAntidoteCount() > 0);
 
         player.setName("new_player_name");
@@ -53,6 +53,7 @@ public class PlayerTest {
         CreatureFactory creatureFactory = new CreatureFactory();
 
         Player player = new Player("PlayerToFight");
+        player.setHealth(30.0);
         Creature creature = creatureFactory.createPikachu();
 
         player.fight(creature);

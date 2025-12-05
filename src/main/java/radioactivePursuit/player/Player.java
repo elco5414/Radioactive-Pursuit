@@ -21,9 +21,8 @@ public class Player {
     private Biome currentLocation;
     private Biome previousLocation;
     private Biome secondPreviousLocation;
-    //TODO is this too wonky? just use random neighbor?
 
-    private static final Double DEFAULT_STARTING_HEALTH = 15.0;
+    private static final Double DEFAULT_STARTING_HEALTH = 10.0;
 
 
     public Player(PlayStrategy playerStrategy) {
@@ -102,7 +101,6 @@ public class Player {
         }
     }
 
-    // TODO Print Something if creature dies or you die
     public void fight(Creature creature) {
         double creatureHealth = creature.getHealth();
         if (creatureHealth == health) {

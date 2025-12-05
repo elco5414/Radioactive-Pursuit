@@ -13,7 +13,6 @@ public class Display {
     public Map<String, Boolean> instantiateMenuOptions(Player currentPlayer, Map<String, Boolean> menuOptions) {
         Map<String, Boolean> newMenuOptions = resetMenuOptions(menuOptions);
 
-        //TODO change to numbers and number input
         if (currentPlayer.canMove()) {
             newMenuOptions.put("Move Biomes", false);
         }

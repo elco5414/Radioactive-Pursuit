@@ -10,25 +10,27 @@ public class CreatureFactory {
     static private final String clefairyName = "Clefairy";
     static private final String squirtleName = "Squirtle";
     static private final String butterfreeName = "Butterfree";
+    static private final Double MIN_HEALTH = 7.0;
+    static private final Double MAX_HEALTH = 12.0;
 
     int assignRadioActiveLevel() {
         return rand.nextInt(3) + 1;
     }
 
     public Creature createPikachu() {
-        return new Pikachu(pikachuName, 5.0, assignRadioActiveLevel());
+        return new Pikachu(pikachuName, rand.nextDouble(MIN_HEALTH, MAX_HEALTH), assignRadioActiveLevel());
     }
 
     public Creature createSquirtle() {
-        return new Squirtle(squirtleName, 7.0, assignRadioActiveLevel());
+        return new Squirtle(squirtleName, rand.nextDouble(MIN_HEALTH, MAX_HEALTH), assignRadioActiveLevel());
     }
 
     public Creature createClefairy() {
-        return new Clefairy(clefairyName, 4.3, assignRadioActiveLevel());
+        return new Clefairy(clefairyName, rand.nextDouble(MIN_HEALTH, MAX_HEALTH), assignRadioActiveLevel());
     }
 
     public Creature createButterfree() {
-         return new Butterfree(butterfreeName, 3.0, assignRadioActiveLevel());
+         return new Butterfree(butterfreeName, rand.nextDouble(MIN_HEALTH, MAX_HEALTH), assignRadioActiveLevel());
     }
 
     public List<Creature> createRiverBiomeCreatures(int amountToGenerate) {
