@@ -1,6 +1,5 @@
 package radioactivePursuit.player;
 
-import radioactivePursuit.interactives.Antidote;
 import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.interactives.Artifact;
 import radioactivePursuit.interactives.ArtifactFactory;
@@ -37,8 +36,9 @@ public class Player {
     }
 
     private List<Artifact> startingAntidotes() {
-        int amount =  rand.nextInt(4);
-        List<Artifact> antidotes = artifactFactory.createAntidotes(amount);
+        List<Artifact> antidotes = new ArrayList<>();
+        int amount =  rand.nextInt(4)+1;
+        antidotes.addAll(artifactFactory.createAntidotes(amount));
         return antidotes;
     }
 
@@ -68,6 +68,10 @@ public class Player {
 
     public void setPlayStrategy(PlayStrategy playStrategy) {
         playerStrat = playStrategy;
+    }
+
+    public PlayStrategy getPlayStrategy() {
+        return playerStrat;
     }
 
     public void doAction() {
@@ -120,6 +124,10 @@ public class Player {
 
     public void move() {
         //TODO: update to the next biome
+        assert getCurrentLocation().hasNeighbors();
+        Biome newBiome = currentLocation.getRandomNeighbor();
+        newBiome.enterBiome(this);
+        setCurrentLocation(newBiome);
     }
 
     public boolean canCure(Creature creature) {

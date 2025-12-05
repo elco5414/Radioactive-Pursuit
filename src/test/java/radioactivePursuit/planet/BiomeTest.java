@@ -2,6 +2,7 @@ package radioactivePursuit.planet;
 
 import org.junit.jupiter.api.Test;
 import radioactivePursuit.creatures.CreatureFactory;
+import radioactivePursuit.player.Player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,5 +37,16 @@ public class BiomeTest {
 
         trainStationBiome.add(creatureFactory.createTrainStationBiomeCreatures(1));
 
+    }
+
+    @Test
+    void testAddPlayer() {
+        Biome trainStationBiome = new TrainStationBiome("Penn Stattion");
+        Player player = new Player("player");
+
+        trainStationBiome.add(player);
+        assertEquals(player.getCurrentLocation(), trainStationBiome);
+        assertEquals(trainStationBiome.player, player);
+        assertTrue(trainStationBiome.hasPlayer);
     }
 }

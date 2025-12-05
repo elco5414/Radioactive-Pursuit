@@ -49,7 +49,7 @@ public class BiomeFactory {
 
     }
 
-    Biome createBiome() {
+    public Biome createBiome() {
         int randomIndex = random.nextInt(biomeTypes.length);
         BiomeType randomType = biomeTypes[randomIndex];
 

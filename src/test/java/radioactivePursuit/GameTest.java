@@ -10,7 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
     @Test
     void testFightTurn() {
+        Game game = new Game();
+        game.currentPlayer = new Player("testFightTurnPlayer");
+        game.currentPlanet = game.worldSetUp();
 
+        //i do not know how to go about game play here genuinely
 
     }
 

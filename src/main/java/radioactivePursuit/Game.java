@@ -74,12 +74,10 @@ public class Game {
                 .build();
     }
 
-
     void showPlayerOptions() {
         this.menuOptions = display.instantiateMenuOptions(this.currentPlayer, this.menuOptions);
         this.display.displayMenuOptions(this.menuOptions);
     }
-
 
     void playTurn() {
         showPlayerOptions();
@@ -136,6 +134,7 @@ public class Game {
             }
         }
     }
+
 
     private void printIntro() {
         System.out.println("Many decades ago, Earth fell silent. A chain of nuclear failures poisoned the land, twisted the wildlife, and forced humanity to flee. A handful of scientists escaped into orbit, watching their home decay from above while they struggled to survive.\n" +

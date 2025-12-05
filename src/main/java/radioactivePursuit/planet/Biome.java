@@ -22,7 +22,7 @@ abstract public class Biome {
     private final List<Artifact> artifacts = new ArrayList<>();
     private final BiomeType type;
     Player player;
-    private boolean hasPlayer;
+    boolean hasPlayer;
 
 
     protected Biome(String name, BiomeType type) {
@@ -88,6 +88,7 @@ abstract public class Biome {
     public void add(Player player) {
         this.hasPlayer = true;
         this.player = player;
+        player.setCurrentLocation(this);
     }
 
     public void remove(Player player) {
@@ -95,6 +96,7 @@ abstract public class Biome {
         hasPlayer = false;
     }
 
+    //TODO where is this used? should this be a function within player?
     public void enterBiome(Player player) {
         add(player);
     }
@@ -164,4 +166,7 @@ abstract public class Biome {
         System.out.println("Display base biome.");
     }
 
+    public void add(Creature creature){
+        creatures.add(creature);
+    }
 }
