@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Game {
-    private final int MAX_BIOMES = 7;
+    private static final int MAX_BIOMES = 7;
     private final CreatureFactory creatureFactory = new CreatureFactory();
     private final ArtifactFactory artifactFactory = new ArtifactFactory();
     private final Display display = new Display();

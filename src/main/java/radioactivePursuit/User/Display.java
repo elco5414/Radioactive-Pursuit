@@ -11,23 +11,35 @@ import java.util.*;
 public class Display {
 
     public Map<String, Boolean> instantiateMenuOptions(Player currentPlayer, Map<String, Boolean> menuOptions) {
+        Map<String, Boolean> newMenuOptions = resetMenuOptions(menuOptions);
+
         //TODO change to numbers and number input
         if (currentPlayer.canMove()) {
-            menuOptions.put("Move Biomes", false);
+            newMenuOptions.put("Move Biomes", false);
         }
         if (currentPlayer.canEat()) {
-            menuOptions.put("Eat Food", false);
+            newMenuOptions.put("Eat Food", false);
         }
         if (currentPlayer.canFight()) {
-            menuOptions.put("Fight Creature", false);
+            newMenuOptions.put("Fight Creature", false);
         }
         if (currentPlayer.canCollectAntidote()) {
-            menuOptions.put("Collect Antidote", false);
+            newMenuOptions.put("Collect Antidote", false);
         }
         if (currentPlayer.canCure(currentPlayer.getCurrentLocation().getCreature())) {
-            menuOptions.put("Cure Creature", false);
+            newMenuOptions.put("Cure Creature", false);
         }
-        menuOptions.put("See Map",false);
+        newMenuOptions.put("See Map",false);
+        return newMenuOptions;
+    }
+
+    private Map<String, Boolean> resetMenuOptions(Map<String, Boolean> menuOptions) {
+        menuOptions.remove("Move Biomes");
+        menuOptions.remove("Eat Food");
+        menuOptions.remove("Fight Creature");
+        menuOptions.remove("Collect Antidote");
+        menuOptions.remove("Cure Creature");
+
         return menuOptions;
     }
 
