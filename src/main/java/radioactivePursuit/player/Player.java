@@ -124,15 +124,14 @@ public class Player {
     public void move() {
         assert getCurrentLocation().hasNeighbors();
         Biome newBiome = currentLocation.getRandomNeighbor();
-        newBiome.add(this);
+        newBiome.enterBiome(this);
         setCurrentLocation(newBiome);
     }
 
     public boolean canCure(Creature creature) {
         boolean curedCreature = creature.isCured();
         boolean livingCreature = creature.isAlive();
-
-        return !curedCreature && livingCreature;
+        return !curedCreature && livingCreature && this.getAntidoteCount() > 0;
     }
 
     public void cure(Creature creature) {
