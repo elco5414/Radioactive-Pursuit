@@ -103,7 +103,6 @@ public class Planet {
         public Builder add(Player player) {
             Biome biome = nextBiome();
             biome.add(player);
-            player.setCurrentLocation(biome);
             return this;
         }
 

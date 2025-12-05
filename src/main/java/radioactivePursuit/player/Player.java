@@ -94,7 +94,6 @@ public class Player {
     public void setCurrentLocation(Biome biome) {
         Biome currentBiome = getCurrentLocation();
         currentLocation = biome;
-        currentLocation.enterBiome(this);
         if (currentBiome != null) {
             currentBiome.remove(this);
         }

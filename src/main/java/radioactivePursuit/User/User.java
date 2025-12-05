@@ -1,8 +1,8 @@
 package radioactivePursuit.User;
 
 public class User {
-    private static String name;
-    private static int score;
+    private String name;
+    private int score;
 
     public String getName() {
         return name;

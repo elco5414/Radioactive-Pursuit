@@ -21,8 +21,8 @@ public class Game {
     private final CreatureFactory creatureFactory = new CreatureFactory();
     private final ArtifactFactory artifactFactory = new ArtifactFactory();
     private final Display display = new Display();
-    private Boolean playerDied = false;
-    private Boolean creaturesResolved = false;
+    Boolean playerDied = false;
+    Boolean creaturesResolved = false;
 
     User currentUser;
     Player currentPlayer;
@@ -81,7 +81,7 @@ public class Game {
 
     void playTurn() {
         showPlayerOptions();
-        setUserChoice();
+        CollectUserChoice();
         PlayStrategy newStrategy = getPlayerStrategy();
         this.currentPlayer.setPlayStrategy(newStrategy);
         this.currentPlayer.doAction();
@@ -117,7 +117,12 @@ public class Game {
         return new InactionStrategy();
     }
 
-    public void setUserChoice() {
+    public void setUserChoice(String userChoice) {
+            menuOptions.put(userChoice, true);
+    }
+
+    public void CollectUserChoice() {
+        //TODO add in a check for if more than one thing is true maybe, in the menu map
         Scanner sc = new Scanner(System.in);
         String userChoice;
 
@@ -126,7 +131,7 @@ public class Game {
             userChoice = sc.nextLine().trim();
 
             if (menuOptions.containsKey(userChoice)) {
-                menuOptions.put(userChoice, true);
+                setUserChoice(userChoice);
                 System.out.println("\nYou selected: " + userChoice);
                 break;
             } else {
@@ -170,7 +175,7 @@ public class Game {
         leaderboard.displayLeaderBoard();
     }
 
-    private int calculateScore() {
+    int calculateScore() {
         int score = 0;
         if (playerDied) {
             return score;

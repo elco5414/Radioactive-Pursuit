@@ -63,7 +63,8 @@ public class BiomeFactory {
         };
     }
 
-    Biome createCityBiome(String name) {
+    //TODO I changed this to public for testing, idk if we want it like that
+    public Biome createCityBiome(String name) {
         Biome biome = new CityBiome(name);
 
         biome.add(artifactFactory.create(ArtifactType.Food));
@@ -73,7 +74,7 @@ public class BiomeFactory {
         return biome;
     }
 
-    Biome createHospitalBiome(String name) {
+    public Biome createHospitalBiome(String name) {
         Biome biome = new HospitalBiome(name);
 
         biome.add(artifactFactory.create(ArtifactType.Antidote));

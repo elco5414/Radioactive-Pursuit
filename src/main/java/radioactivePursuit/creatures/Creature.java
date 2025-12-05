@@ -47,6 +47,6 @@ abstract public class Creature {
     }
 
     public void displayCreature(){
-        //throw an error here this shuold not hit
+        //throw an error here this should not ever hit
     }
 }

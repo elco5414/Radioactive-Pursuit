@@ -6,7 +6,7 @@ import java.util.List;
 public class Leaderboard {
 
     private static final Leaderboard LeaderboardInstance = new Leaderboard();
-    private List<User> userList = new ArrayList<>();
+    List<User> userList = new ArrayList<>();
 
     public static Leaderboard getInstance(){
         return LeaderboardInstance;

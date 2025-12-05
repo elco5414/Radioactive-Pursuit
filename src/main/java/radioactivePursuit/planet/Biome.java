@@ -146,7 +146,6 @@ abstract public class Biome {
     }
 
     public Creature getCreature() {
-        List<Creature> creatures = getLivingCreatures();
         if (creatures.isEmpty()) {
             return null;
         }
