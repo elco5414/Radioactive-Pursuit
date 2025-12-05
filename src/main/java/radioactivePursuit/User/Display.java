@@ -72,7 +72,7 @@ public class Display {
     public void displayMap(Planet currentPlanet, Player currentPlayer){
         List<Biome> biomes = currentPlanet.getBiomes();
 
-        System.out.println("\n╔══════════════════════════════════════════════════════════════════ PLANET MAP ═════════════════════════════════════════════════════════════════╗");
+        System.out.println("\n╔═════════════════════════════════════════════════════════════ PLANET MAP ═════════════════════════════════════════════════════╗");
         System.out.print("║ ");
         for(int i = 0; i < biomes.size(); i++){
             System.out.print("┌──────────────┐");
@@ -121,7 +121,7 @@ public class Display {
             if(i < biomes.size() - 1) System.out.print("──");
         }
         System.out.println(" ║");
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝\n");
+        System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝\n");
     }
 
     public void collectUserChoice(Map<String, Boolean> menuOptions) {

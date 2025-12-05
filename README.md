@@ -26,8 +26,13 @@ We used 5 patterns:
 **Test Coverage:** 
 ![coverage.png](images/coverage.png)
 
+**Game Output**
+![gameplay.png](images/gameplay.png)
+![output.png](images/output.png)
+
 **Expansion of Game**
 Now that we have a starting point for this, there is room that was intentionally left for this to be built upon as a project. 
 
 It has been designed to set up more complicated game play, games with more creatures, more variety, more biomes, and more interactive objects throughout the maze (which means more player options as well). We also hope to expand into a more thorough game UI. 
 
+The leaderboard also currently stores plays but only for a certain period, to store it for all time, we would add in a file that it writes and reads to as well. 
