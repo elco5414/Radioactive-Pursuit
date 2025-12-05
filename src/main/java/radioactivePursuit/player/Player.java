@@ -122,7 +122,6 @@ public class Player {
     }
 
     public void move() {
-        //TODO: update to the next biome
         assert getCurrentLocation().hasNeighbors();
         Biome newBiome = currentLocation.getRandomNeighbor();
         newBiome.enterBiome(this);
@@ -153,7 +152,7 @@ public class Player {
         antidoteList.add(antidote);
     }
 
-    public void useAntidote() {  //TODO: fix this
+    public void useAntidote() {
         if(getAntidoteCount() != 0){
             Artifact lastAntidote = this.antidoteList.getLast();
             this.antidoteList.remove(lastAntidote);

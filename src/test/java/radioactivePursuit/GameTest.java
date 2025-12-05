@@ -80,9 +80,14 @@ class GameTest {
         game.currentPlanet = game.worldSetUp();
         Biome playersFirstRoom = player.getCurrentLocation();
 
-        game.showPlayerOptions();
-        game.setUserChoice("Move Biomes");
+        game.menuOptions.put("Move Biomes",true);
+        game.menuOptions.put("Eat Food", false);
+        game.menuOptions.put("Fight Creature", false);
+        game.menuOptions.put("Collect Antidote", false);
+        game.menuOptions.put("Cure Creature", false);
+        game.menuOptions.put("See Map",false);
 
+        PlayStrategy strategy = game.getPlayerStrategy();
         game.playTurn();
         assertTrue(player.getCurrentLocation() != playersFirstRoom);
     }

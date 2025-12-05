@@ -13,6 +13,7 @@ public class BiomeFactory {
     private final ArtifactFactory artifactFactory;
     private final CreatureFactory creatureFactory;
 
+    Random random = new Random();
     private static final BiomeType[] biomeTypes = BiomeType.values();
     public static String[] CITY_NAMES = new String[]{"Oakridge", "Silverport", "Brookstone", "Denver", "Northgate"};
     public static String[] HOSPITAL_NAMES = new String[]{"Central General Hospital", "Riverside Medical Center", "Westview Health Clinic", "Greenfield Medical Plaza", "Lakeside Regional Hospital", "Hillcrest Medical Center"};
@@ -30,23 +31,6 @@ public class BiomeFactory {
     public BiomeFactory(ArtifactFactory artifactFactory, CreatureFactory creatureFactory) {
         this.artifactFactory = artifactFactory;
         this.creatureFactory = creatureFactory;
-    }
-
-    Random random = new Random();
-
-
-    //TODO (mb): why do we need both of these createBiomes?
-    Biome createBiome(String name) {
-        int randomIndex = random.nextInt(biomeTypes.length);
-        BiomeType randomType = biomeTypes[randomIndex];
-
-        return switch (randomType) {
-            case City -> createCityBiome(name);
-            case Hospital -> createHospitalBiome(name);
-            case River -> createRiverBiome(name);
-            case TrainStation -> createTrainStationBiome(name);
-        };
-
     }
 
     public Biome createBiome() {

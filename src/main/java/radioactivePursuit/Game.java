@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Game {
-    //TODO instance of game
     private final int MAX_BIOMES = 7;
     private final CreatureFactory creatureFactory = new CreatureFactory();
     private final ArtifactFactory artifactFactory = new ArtifactFactory();
@@ -34,7 +33,6 @@ public class Game {
 
         Game game = new Game();
 
-        //TODO dependency injection?
         game.currentUser = game.getUserName();
         game.currentPlayer = new Player(game.currentUser.getName());
         game.currentPlanet = game.worldSetUp();
@@ -117,10 +115,6 @@ public class Game {
         return new InactionStrategy();
     }
 
-    public void setUserChoice(String userChoice) {
-            menuOptions.put(userChoice, true);
-    }
-
     public void CollectUserChoice() {
         //TODO add in a check for if more than one thing is true maybe, in the menu map
         Scanner sc = new Scanner(System.in);
@@ -131,7 +125,7 @@ public class Game {
             userChoice = sc.nextLine().trim();
 
             if (menuOptions.containsKey(userChoice)) {
-                setUserChoice(userChoice);
+                menuOptions.put(userChoice, true);
                 System.out.println("\nYou selected: " + userChoice);
                 break;
             } else {
