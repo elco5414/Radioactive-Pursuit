@@ -2,6 +2,7 @@ package radioactivePursuit.User;
 
 import radioactivePursuit.creatures.Creature;
 import radioactivePursuit.interactives.Artifact;
+import radioactivePursuit.planet.Biome;
 import radioactivePursuit.planet.Planet;
 import radioactivePursuit.player.*;
 
@@ -38,12 +39,21 @@ public class Display {
         }
     }
 
-    public static void displayMap(Planet currentPlanet){
+    public static void displayMap(Planet currentPlanet, Player currentPlayer){
         //TODO, print a cute version of the map of biomes that includes where the player is right now, maybe what is in the biomes, TBD
+        System.out.println("=== PLANET MAP ===");
+        for(Biome biome: currentPlanet.getBiomes()){
+            System.out.println(biome.getName());
+            if(biome == currentPlayer.getCurrentLocation()){
+                System.out.println("👩‍🔬");
+            }
+            System.out.println("⬇\n");
+        }
     }
 
 
     public static void turnDisplay(Player player){
+        System.out.println("------CURRENT TURN-------\n");
         //TODO: clean up this function fs
         player.displayScientist();
         player.getCurrentLocation().displayBiome();

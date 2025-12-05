@@ -108,7 +108,7 @@ public class Game {
                     return new CurerStrategy();
 
                 } else if ("See Map".equals(chosenOption)) {
-                    display.displayMap(this.currentPlanet);
+                    display.displayMap(this.currentPlanet, this.currentPlayer);
                     return new InactionStrategy();
                 }
                 break;
