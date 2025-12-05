@@ -2,22 +2,16 @@ package radioactivePursuit.interactives;
 
 public class Food extends Artifact {
 
-    // TODO fix healthValue of food to be int o rounded off
     protected final double healthValue;
 
     protected Food(String name, double healthValue) {
         super(name, ArtifactType.Food);
-        this.healthValue = healthValue;
-
+        this.healthValue = Math.round(healthValue * 100.0) / 100.0;
     }
+
 
     public double getHealthValue() {
         return healthValue;
     }
 
-    @Override
-    public String toString() {
-        String formattedHealth = String.format("%.2f", healthValue);
-        return name + "(" + formattedHealth + ")";
-    }
 }

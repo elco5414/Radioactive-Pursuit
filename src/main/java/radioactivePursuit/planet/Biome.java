@@ -96,11 +96,6 @@ abstract public class Biome {
         hasPlayer = false;
     }
 
-    //TODO where is this used? should this be a function within player?
-    public void enterBiome(Player player) {
-        add(player);
-    }
-
     public int numberOfNeighbors() {
         return neighbors.size();
     }
