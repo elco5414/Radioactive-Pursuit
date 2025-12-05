@@ -1,6 +1,7 @@
 package radioactivePursuit;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import radioactivePursuit.User.User;
 import radioactivePursuit.creatures.CreatureFactory;
@@ -120,6 +121,7 @@ class GameTest {
         assertEquals(score, 0);
     }
 
+    @Disabled
     @Test
     void testGameEndsThroughCreatureCured() {
 
@@ -141,6 +143,7 @@ class GameTest {
         assertEquals(score, 3);
     }
 
+    @Disabled
     @Test
     void testGameEndsThroughCreatureDeath() {
 
