@@ -70,15 +70,58 @@ public class Display {
     }
 
     public void displayMap(Planet currentPlanet, Player currentPlayer){
-        //TODO, print a cute version of the map of biomes that includes where the player is right now, maybe what is in the biomes, TBD
-        System.out.println("=== PLANET MAP ===");
-        for(Biome biome: currentPlanet.getBiomes()){
-            System.out.println(biome.getName());
-            if(biome == currentPlayer.getCurrentLocation()){
-                System.out.println("👩‍🔬");
-            }
-            System.out.println("⬇\n");
+        List<Biome> biomes = currentPlanet.getBiomes();
+
+        System.out.println("\n╔═══════════════════════════════ PLANET MAP ═══════════════════════════════╗");
+        System.out.print("║ ");
+        for(int i = 0; i < biomes.size(); i++){
+            System.out.print("┌──────────────┐");
+            if(i < biomes.size() - 1) System.out.print("──");
         }
+        System.out.println(" ║");
+
+        System.out.print("║ ");
+        for(int i = 0; i < biomes.size(); i++){
+            Biome biome = biomes.get(i);
+            String name = biome.getName();
+            if(name.length() > 12) name = name.substring(0, 12);
+            System.out.printf("│ %-12s │", name);
+            if(i < biomes.size() - 1) System.out.print("  ");
+        }
+        System.out.println(" ║");
+
+        System.out.print("║ ");
+        for(int i = 0; i < biomes.size(); i++){
+            Biome biome = biomes.get(i);
+            String artifact = "    ----    ";
+            if(biome.getArtifacts() != null && !biome.getArtifacts().isEmpty()){
+                String artName = biome.getArtifacts().get(0).getName();
+                if(artName.length() > 12) artName = artName.substring(0, 12);
+                artifact = String.format("%-12s", artName);
+            }
+            System.out.printf("│ %s │", artifact);
+            if(i < biomes.size() - 1) System.out.print("  ");
+        }
+        System.out.println(" ║");
+        System.out.print("║ ");
+        for(int i = 0; i < biomes.size(); i++){
+            Biome biome = biomes.get(i);
+            if(biome == currentPlayer.getCurrentLocation()){
+                System.out.print("│  👩‍🔬 YOU   │");
+            } else {
+                System.out.print("│              │");
+            }
+            if(i < biomes.size() - 1) System.out.print("  ");
+        }
+        System.out.println(" ║");
+
+        System.out.print("║ ");
+        for(int i = 0; i < biomes.size(); i++){
+            System.out.print("└──────────────┘");
+            if(i < biomes.size() - 1) System.out.print("──");
+        }
+        System.out.println(" ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════╝\n");
     }
 
     public void collectUserChoice(Map<String, Boolean> menuOptions) {

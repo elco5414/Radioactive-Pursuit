@@ -15,14 +15,23 @@ public class ArtifactFactory {
             "🧁", "🍎", "🍌", "🥩", "🥗", "🍟", "🍔", "🍕", "🍳",
             "🥓", "🥐", "🍩", "🍗", "🍝", "🍚", "🍣", "🌮", "🌯",
             "🌭", "🥭", "🍓", "🍒"};
+    private static final String[] ANTIDOTE_NAMES = new String[]{
+            "🧪", "💊", "🧫"};
+
     private static final Map<ArtifactType, String[]> NAMES = new HashMap<>();
 
     static {
         NAMES.put(ArtifactType.Food, FOOD_NAMES);
+        NAMES.put(ArtifactType.Antidote, ANTIDOTE_NAMES);
     }
 
     private static double getRandomValue() {
         return random.nextDouble(MINIMUM_VALUE, MAXIMUM_VALUE);
+    }
+
+    private static String getRandomName(ArtifactType type) {
+        String[] names = NAMES.get(type);
+        return names[random.nextInt(names.length)];
     }
 
     public List<Artifact> createAntidotes(int numberOfItems) {
@@ -36,7 +45,7 @@ public class ArtifactFactory {
     }
 
     public Artifact create(ArtifactType type) {
-        return create(type, "🧪", getRandomValue());
+        return create(type, getRandomName(type), getRandomValue());
     }
 
 
