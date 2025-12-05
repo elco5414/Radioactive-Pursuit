@@ -120,8 +120,6 @@ class GameTest {
         assertEquals(score, 0);
     }
 
-
-    // TODO we can make these work by making manufactured methods just for testing, but i dont think we should
     @Test
     void testGameEndsThroughCreatureCured() {
 
@@ -162,26 +160,6 @@ class GameTest {
 
         int score = game.calculateScore();
         assertEquals(score, 1);
-
-    }
-
-    @Test
-    void testFightTurn() {
-
-    }
-
-    @Test
-    void testPlayTurn(){
-
-    }
-
-    @Test
-    void showPlayerOptions(){
-
-    }
-
-    @Test
-    void playGame(){
 
     }
 

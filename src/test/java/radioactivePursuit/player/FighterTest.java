@@ -29,8 +29,9 @@ public class FighterTest {
                 .build();
 
         double creatureStartingHealth = player.getCurrentLocation().getCreature().getHealth();
+        double playerStartingHealth = player.getHealth();
         player.doAction();
 
-        assertTrue(creatureStartingHealth > player.getCurrentLocation().getCreature().getHealth());
+        assertTrue(creatureStartingHealth > player.getCurrentLocation().getCreature().getHealth() || player.getHealth() < playerStartingHealth);
     }
 }

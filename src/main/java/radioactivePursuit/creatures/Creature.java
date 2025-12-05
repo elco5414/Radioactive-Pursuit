@@ -7,7 +7,7 @@ abstract public class Creature {
 
     Creature(String newName, Double newHealth, int newRadioActiveLevel) {
         this.name = newName;
-        this.health = newHealth;
+        this.health = Math.round(newHealth * 100.0) / 100.0;
         this.radioActiveLevel = newRadioActiveLevel;
     }
 
