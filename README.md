@@ -1,8 +1,6 @@
-# Radioactive-Pursuit
-
-## Welcome to RadioActive Pursuit!
-
 ![radioActivePursuit.jpg](images/radioActivePursuit.jpg)
+# Radioactive-Pursuit
+## Welcome to RadioActive Pursuit!
 
 ## You are a scientist who travelled to space before Earth went through an apocolptic event that wiped out humanity here. 
 ![startingSceneBackground.png](images/startingSceneBackground.png)
