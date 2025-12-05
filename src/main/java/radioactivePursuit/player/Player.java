@@ -165,22 +165,6 @@ public class Player {
         }
     }
 
-    public void displayScientistArt() {
-        System.out.println(
-                "    (ᵔ‿ᵔ)✨\n" +
-                "    /|️🔬|\\\n" +
-                " 💉/ |  | \\\n" +
-                "    /|  |\\\n" +
-                "   /_|__|_\\\n" +
-                "     /  \\\n"
-        );
-    }
-
-    public void displayScientist() {
-        System.out.println(getName() + ": " + getAntidoteCount() + "🧪, " + getHealth() + "❤️.\n");
-        displayScientistArt();
-    }
-
     public boolean isAlive() {
         return health > 0;
     }

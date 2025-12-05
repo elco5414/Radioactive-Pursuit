@@ -8,7 +8,7 @@ public class TrainStationBiome extends Biome {
 
     @Override
     public void displayBiome() {
-
+        System.out.println("~~~~~" + super.getName()+ "~~~~~\n");
         System.out.println(
                 "               .---._\n" +
                         "           .--(. '  .).--.      . .-.\n" +

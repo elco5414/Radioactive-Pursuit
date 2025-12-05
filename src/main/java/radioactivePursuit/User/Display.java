@@ -72,7 +72,7 @@ public class Display {
     public void displayMap(Planet currentPlanet, Player currentPlayer){
         List<Biome> biomes = currentPlanet.getBiomes();
 
-        System.out.println("\n╔═══════════════════════════════ PLANET MAP ═══════════════════════════════╗");
+        System.out.println("\n╔═════════════════════════════════════════════════════════════════════════════════ PLANET MAP ═════════════════════════════════════════════════════════════════════════════════╗");
         System.out.print("║ ");
         for(int i = 0; i < biomes.size(); i++){
             System.out.print("┌──────────────┐");
@@ -121,7 +121,7 @@ public class Display {
             if(i < biomes.size() - 1) System.out.print("──");
         }
         System.out.println(" ║");
-        System.out.println("╚══════════════════════════════════════════════════════════════════════════╝\n");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝\n");
     }
 
     public void collectUserChoice(Map<String, Boolean> menuOptions) {
@@ -143,24 +143,41 @@ public class Display {
     }
 
     public void turnDisplay(Player player){
-        System.out.println("------CURRENT TURN-------\n");
-        //TODO: clean up this function fs
-        player.displayScientist();
-        player.getCurrentLocation().displayBiome();
+            Biome currentBiome = player.getCurrentLocation();
+            List<Creature> creatures = currentBiome.getLivingCreatures();
+            List<Artifact> artifacts = currentBiome.getArtifacts();
 
-        //TODO: find a way to display the creatures within the biome, where is that and artifacts
-        List<Creature> creaturesInBiome = player.getCurrentLocation().getLivingCreatures();
-        List<Artifact> artifactsInBiome = player.getCurrentLocation().getArtifacts();
+            System.out.println("\n╔═══════════════════════════════════ CURRENT TURN ════════════════════════════════════════╗");
+            System.out.println("║                                                                                          ║");
 
-        for(Creature creature: creaturesInBiome){
-            creature.displayCreature();
+            System.out.print("║  👩‍🔬 " + player.getName() + ": " + player.getAntidoteCount() + "🧪, " + player.getHealth() + "❤️");
+            System.out.print("  |  🌍 " + currentBiome.getName());
+            System.out.println("                                    ║");
+
+            System.out.println("║  ════════════════════════════════════════════════════════════════════════════════════  ║");
+            System.out.println("║                                                                                          ║");
+
+            if(!creatures.isEmpty()){
+                System.out.println("║  🦎 CREATURES IN BIOME:                                                                  ║");
+                for(Creature creature : creatures){
+                    System.out.print("║     ");
+                    creature.displayCreature();
+                }
+            } else {
+                System.out.println("║  🦎 CREATURES: None                                                                      ║");
+            }
+            System.out.println("║                                                                                          ║");
+            if(!artifacts.isEmpty()){
+                System.out.println("║  🏺 ARTIFACTS IN BIOME:                                                                  ║");
+                for(Artifact artifact : artifacts){
+                    System.out.println("║     • " + artifact.getName() + "                                                         ║");
+                }
+            } else {
+                System.out.println("║  🏺 ARTIFACTS: None                                                                      ║");
+            }
+            System.out.println("║                                                                                          ║");
+            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝\n");
         }
-        for(Artifact artifact: artifactsInBiome){
-            //TODO: clean this, change the function in Biome to just return names maybe in a list..?
-            System.out.println(artifact.getName());
-        }
-
-    }
 
     public void showBadEnding() {
         System.out.println("You Died. Humanity is no longer...\n");
