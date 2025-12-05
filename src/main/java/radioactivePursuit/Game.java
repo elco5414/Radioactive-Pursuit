@@ -86,38 +86,27 @@ public class Game {
     }
 
     public PlayStrategy getPlayerStrategy() {
-        // TODO refactor everything
         for (Map.Entry<String, Boolean> entry : menuOptions.entrySet()) {
-            if (entry.getValue() == true) {
-                String chosenOption = entry.getKey();
-                if ("Move Biomes".equals(chosenOption)) {
-                    return new MoverStrategy();
-
-                } else if ("Eat Food".equals(chosenOption)) {
-                    return new MuncherStrategy();
-
-                } else if ("Fight Creature".equals(chosenOption)) {
-                    return new FighterStrategy();
-
-                } else if ("Collect Antidote".equals(chosenOption)) {
-                    return new CollectingAntidoteStrategy();
-
-                } else if ("Cure Creature".equals(chosenOption)) {
-                    return new CurerStrategy();
-
-                } else if ("See Map".equals(chosenOption)) {
-                    display.displayMap(this.currentPlanet, this.currentPlayer);
-                    return new InactionStrategy();
-                }
-                break;
+            if (entry.getValue()) {
+                return switch (entry.getKey()) {
+                    case "Move Biomes" -> new MoverStrategy();
+                    case "Eat Food" -> new MuncherStrategy();
+                    case "Fight Creature" -> new FighterStrategy();
+                    case "Collect Antidote" -> new CollectingAntidoteStrategy();
+                    case "Cure Creature" -> new CurerStrategy();
+                    case "See Map" -> {
+                        display.displayMap(this.currentPlanet, this.currentPlayer);
+                        yield new InactionStrategy();
+                    }
+                    default -> new InactionStrategy();
+                };
             }
         }
         return new InactionStrategy();
     }
 
     public void CollectUserChoice() {
-        //TODO add in a check for if more than one thing is true maybe, in the menu map
-        Scanner sc = new Scanner(System.in);
+       Scanner sc = new Scanner(System.in);
         String userChoice;
 
         while (true) {
